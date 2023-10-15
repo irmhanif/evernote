@@ -1,0 +1,19 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.profile {
+  .downArrow {
+    stroke: #fff;
+    display: inline-block;
+    flex-shrink: 0;
+    height: 8px;
+    margin-left: 9px;
+    width: 8px;
+    overflow: hidden;
+    fill: #fff;
+  }
+  .setting{
+    stroke: #737373
+  }
+}
