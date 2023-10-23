@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+//icon width
+$small-width: 22px;
+$small-height: 22px;
+
 .profile {
   .downArrow {
     stroke: #fff;
@@ -13,7 +17,35 @@
     overflow: hidden;
     fill: #fff;
   }
-  .setting{
-    stroke: #737373
+  .setting {
+    stroke: #737373;
+    width: $small-width;
+    height: $small-height;
+    color: #737373;
   }
+}
+.reducedSideBar {
+  min-width: 60px !important;
+  flex: 0 0 60px !important;
+}
+.collapseButton {
+  position: absolute;
+  right: -10px;
+  background: #262626;
+  padding: 8px 2px;
+  height: 40px;
+  width: 25px;
+  color: #fff;
+  bottom: 29px;
+}
+.sideBarResizer {
+    width: 2px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    cursor: e-resize;
+    &:hover, &:active {
+      background-color: #00a3f4;
+    }
 }
