@@ -2,7 +2,12 @@ import React from 'react'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div id='HOME-CONTAINER'>
+      <div className='topContainer'>
+        <div className='backgroundImg'></div>
+      </div>
+
+    </div>
   )
 }
 

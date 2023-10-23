@@ -13,8 +13,10 @@ import {
     BsChevronRight
 } from "react-icons/bs";
 import Profile from './Profile';
+import { useNavigate } from 'react-router-dom';
 
 function SideBar() {
+    const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
     const { Sider } = Layout;
     const [isResizing, setIsResizing] = useState(false);
@@ -87,7 +89,7 @@ function SideBar() {
                     theme="dark"
                     className='bg-primary'
                     mode="inline"
-                    defaultSelectedKeys={['2']}
+                    defaultSelectedKeys={['3']}
                     items={[
                         {
                             key: '2',
@@ -98,21 +100,33 @@ function SideBar() {
                             key: '3',
                             icon: <HomeFilled />,
                             label: 'Home',
+                            onClick: () => {
+                                navigate('/');
+                            }
                         },
                         {
                             key: '4',
                             icon: <StarFilled />,
                             label: 'Shortcuts',
+                            onClick: () => {
+                                navigate('/shortCuts');
+                            }
                         },
                         {
                             key: '5',
                             icon: <FileTextFilled />,
                             label: 'Notes',
+                            onClick: () => {
+                                navigate('/notes');
+                            }
                         },
                         {
                             key: '6',
                             icon: <CheckCircleFilled />,
                             label: 'Tasks',
+                            onClick: () => {
+                                navigate('/tasks');
+                            }
                         },
                     ]}
                 />

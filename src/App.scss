@@ -39,13 +39,34 @@ $small-height: 22px;
   bottom: 29px;
 }
 .sideBarResizer {
-    width: 2px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    cursor: e-resize;
-    &:hover, &:active {
-      background-color: #00a3f4;
+  width: 2px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  cursor: e-resize;
+  &:hover,
+  &:active {
+    background-color: #00a3f4;
+  }
+}
+
+#HOME-CONTAINER {
+  scroll-snap-type: y proximity;
+  margin-right: 0;
+
+  .topContainer {
+    height: 460px;
+    width: 100%;
+    overflow: hidden;
+    .backgroundImg {
+      background: url("../src/assets/flower.jpg");
+      transition: opacity 0.4s ease 0s, transform 200ms ease-out 0s,
+        background-position 200ms linear 0s, filter 800ms ease-in 0s;
+      filter: initial;
+      background-position: 50% 54%;
+      transform: perspective(1000px) scale(1);
+      height: 100%;
     }
+  }
 }
