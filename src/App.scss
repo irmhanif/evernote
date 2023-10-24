@@ -1,13 +1,13 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 //icon width
 $small-width: 22px;
 $small-height: 22px;
 
-// font-family: 'Playpen Sans', cursive;
+// font-family: 'Playpen Sans', cursive; font-family: 'Quicksand', sans-serif;
 body {
   font-family: "Playpen Sans", cursive;
 
@@ -77,7 +77,13 @@ body {
 
     .stickyHeader {
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-      font-family: 'Playpen Sans', cursive;
+      font-family: "Playpen Sans", cursive;
     }
   }
+}
+
+.calendarContainer {
+  font-family: "Quicksand", sans-serif;
+  width: 250px;
+  height: 270px;
 }
