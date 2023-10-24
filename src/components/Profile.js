@@ -18,7 +18,7 @@ function Profile(props) {
                 </>}
             </div>
             <div>
-                <AiOutlineSetting class="setting" color='#737373' />
+                <AiOutlineSetting className="setting" color='#737373' />
             </div>
         </div>
     )
