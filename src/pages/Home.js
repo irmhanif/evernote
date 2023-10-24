@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import cs from 'classnames';
 import flower from '../assets/flower2.jpg';
-import { getTimeOfDay } from '../helpers';
+import { calculateImageBrightness } from '../helpers';
+import StickyTop from '../components/StickyTop';
+
 function Home() {
 
   const [backgroundImage, setBackgroundImage] = useState(null);
@@ -30,28 +32,7 @@ function Home() {
     };
   }, []);
 
-  const calculateImageBrightness = (image) => {
-    // Here, you can calculate the image brightness using image data.
-    // This is a simplified example and may not be highly accurate.
-    // You can find more advanced algorithms to calculate brightness.
-
-    const canvas = document.createElement('canvas');
-    canvas.width = image.width;
-    canvas.height = image.height;
-
-    const context = canvas.getContext('2d');
-    context.drawImage(image, 0, 0);
-
-    const imageData = context.getImageData(0, 0, image.width, image.height).data;
-    let sum = 0;
-
-    for (let i = 0; i < imageData.length; i += 4) {
-      // Calculate brightness (a simple average of RGB values)
-      sum += (imageData[i] + imageData[i + 1] + imageData[i + 2]) / 3;
-    }
-
-    return sum / (imageData.length / 4);
-  };
+  
 
 
   const textStyle = {
@@ -63,12 +44,7 @@ function Home() {
       <div className={cs('topContainer')}>
         <div style={{ backgroundImage: `url(${backgroundImage})`}} className={cs('backgroundImg')}></div>
       </div>
-      <div className={cs('flex justify-between absolute top-0 left-0 w-full p-4 stickyHeader')} style={textStyle}>
-        <h3>Good {getTimeOfDay()}, Mohamed!</h3>
-        <div className={cs('datTimeContainer')}>
-          <p>TUESDAY, 24 OCTOBER 2023</p>
-        </div>
-      </div>
+      <StickyTop textStyle={textStyle} />
     </div>
   )
 }
