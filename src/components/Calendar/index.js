@@ -1,8 +1,11 @@
 import moment from 'moment';
-import React, {useEffect, useState}  from 'react'
+import React, { useEffect, useState } from 'react'
 import Events from './Events';
 import Week from './Week';
 import DayNames from './DayNames';
+import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
+import { RiAddBoxFill, RiArrowLeftCircleFill } from "react-icons/ri";
+
 import "./styles/calendar.scss";
 
 function Calendar() {
@@ -149,9 +152,9 @@ function Calendar() {
         <section className="main-calendar">
             <header className="calendar-header">
                 <div className="row title-header">{renderDayLabel()}</div>
-                <div className="row button-container">
-                    <i className="box arrow fa fa-angle-left" onClick={showCalendar} />
-                    <i className="box event-button fa fa-plus-square" onClick={addEvent} />
+                <div className="row button-container flex justify-evenly">
+                    <RiArrowLeftCircleFill onClick={showCalendar} className="box event-button " />
+                    <RiAddBoxFill onClick={addEvent} className="box event-button " />
                 </div>
             </header>
             <Events
@@ -166,13 +169,13 @@ function Calendar() {
     const calendarView = (
         <section className="main-calendar">
             <header className="calendar-header">
-                <div className="row title-header">
-                    <i className="box arrow fa fa-angle-left" onClick={previous} />
+                <div className="row title-header flex justify-evenly">
+                    <BsArrowLeftShort onClick={previous} className='cursor-pointer' />
                     <div className="box header-text">
                         {renderTodayLabel()}
                         {renderMonthLabel()}
                     </div>
-                    <i className="box arrow fa fa-angle-right" onClick={next} />
+                    <BsArrowRightShort onClick={next} className='cursor-pointer' />
                 </div>
                 <DayNames />
             </header>
