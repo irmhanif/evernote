@@ -3,6 +3,7 @@ import cs from 'classnames';
 import flower from '../assets/flower2.jpg';
 import { calculateImageBrightness } from '../helpers';
 import StickyTop from '../components/StickyTop';
+import HomeGrid from '../components/HomeGrid';
 
 function Home() {
 
@@ -32,9 +33,6 @@ function Home() {
     };
   }, []);
 
-  
-
-
   const textStyle = {
     color: textColor !== 'light' ? 'black' : 'white', // Set text color based on brightness
   };
@@ -42,9 +40,10 @@ function Home() {
   return (
     <div id='HOME-CONTAINER' className={cs('relative')}>
       <div className={cs('topContainer')}>
-        <div style={{ backgroundImage: `url(${backgroundImage})`}} className={cs('backgroundImg')}></div>
+        <div style={{ backgroundImage: `url(${backgroundImage})` }} className={cs('backgroundImg')}></div>
+        <StickyTop textStyle={textStyle} />
       </div>
-      <StickyTop textStyle={textStyle} />
+      <HomeGrid />
     </div>
   )
 }
