@@ -7,10 +7,41 @@
 $small-width: 22px;
 $small-height: 22px;
 
+/* Define the styles for the scrollbar */
+::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Define the track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 50px;
+}
+
+/* Add some styles for the corner where two scrollbars meet */
+::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
 // font-family: 'Playpen Sans', cursive; font-family: 'Quicksand', sans-serif;
 body {
   font-family: "Playpen Sans", cursive;
-
+  .main-layout {
+    overflow: hidden;
+    max-height: 100vh;
+    .content-area {
+      overflow-y: scroll;
+    }
+  }
   .profile {
     .downArrow {
       stroke: #fff;
@@ -39,9 +70,10 @@ body {
     background: #262626;
     padding: 8px 2px;
     height: 40px;
-    width: 25px;
+    width: 26px !important;
     color: #fff;
     bottom: 29px;
+    transition: 0.5s;
   }
   .sideBarResizer {
     width: 2px;
@@ -50,9 +82,11 @@ body {
     bottom: 0;
     right: 0;
     cursor: e-resize;
+    transition: 0.5s;
     &:hover,
     &:active {
       background-color: #00a3f4;
+      transition: 0.5s;
     }
   }
 

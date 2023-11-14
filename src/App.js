@@ -13,9 +13,9 @@ const App = () => {
   console.log(colorBgContainer)
   return (
     <Router>
-      <Layout >
+      <Layout className='main-layout'>
         <SideBar />
-        <Layout>
+        <Layout className='content-area'>
           <Routes>
             <RouteV6 path="/" element={<Home />} />
             <RouteV6 path="*" element={<NotFound />} />
