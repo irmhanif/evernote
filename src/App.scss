@@ -10,6 +10,7 @@ $small-height: 22px;
 /* Define the styles for the scrollbar */
 ::-webkit-scrollbar {
   width: 5px; /* Width of the scrollbar */
+  height: 5px; /* Width of the scrollbar */
 }
 
 /* Handle on hover */
@@ -32,6 +33,7 @@ $small-height: 22px;
 ::-webkit-scrollbar-corner {
   background: #f1f1f1;
 }
+
 // font-family: 'Playpen Sans', cursive; font-family: 'Quicksand', sans-serif;
 body {
   font-family: "Playpen Sans", cursive;
@@ -95,7 +97,7 @@ body {
     margin-right: 0;
 
     .topContainer {
-      height: 460px;
+      height: 250px;
       width: 100%;
       overflow: hidden;
       .backgroundImg {
@@ -115,7 +117,10 @@ body {
     }
   }
   .gridSection {
-    margin-top: -150px;
+    margin-top: -50px;
+  }
+  .scratchPad {
+    background-color: rgb(255, 244, 186);
   }
 }
 
@@ -123,30 +128,30 @@ body {
   font-family: "Quicksand", sans-serif;
   width: 250px;
   height: 270px;
-  .CalenBtn {
-    color: #fff;
-    background-color: #1677ff;
-    box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
-    box-sizing: border-box;
-    font-size: 14px;
-    height: 32px;
-    padding: 4px 15px;
-    border-radius: 6px;
-    outline: none;
-    position: relative;
-    display: inline-block;
-    font-weight: 400;
-    white-space: nowrap;
-    text-align: center;
-    background-image: none;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-    user-select: none;
-    touch-action: manipulation;
-    display: flex;
-    justify-content: space-between;
-    width: 230px;
-    align-items: center;
-  }
+}
+.CalenBtn {
+  color: #fff;
+  background-color: #1677ff;
+  box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 32px;
+  padding: 4px 15px;
+  border-radius: 6px;
+  outline: none;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  user-select: none;
+  touch-action: manipulation;
+  display: flex;
+  justify-content: space-between;
+  width: 230px;
+  align-items: center;
 }

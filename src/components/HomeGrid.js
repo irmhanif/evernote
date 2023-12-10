@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { WidthProvider, Responsive } from 'react-grid-layout';
+import GridLayout, { WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
+import ScratchPad from './ScratchPad';
+import HomeNotes from './HomeNotes';
 
-const ReactGridLayout = WidthProvider(Responsive);
+const ReactGridLayout = WidthProvider(GridLayout);
 
 const HomeGrid = () => {
     const [layout, setLayout] = useState([
@@ -34,28 +36,22 @@ const HomeGrid = () => {
             </div>
             <ReactGridLayout
                 className="layout gridSection"
-                layouts={{ lg: layout }}
+                layout={layout}
                 onLayoutChange={onLayoutChange}
                 isDraggable={isDraggable}
                 isResizable={isDraggable}
-                cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+                cols={12}
                 rowHeight={30}
                 width={1200}
                 draggableHandle={null}
                 resizeHandles={['s', 'w', 'e', 'sw', 'se']}
             >
                 <div key="notes" className="bg-white p-4 shadow-md rounded-md">
-                    <h2 className="text-2xl font-bold mb-4 ">Notes</h2>
-                    {/* Your Notes content goes here */}
-                    {/* Example content */}
-                    <p>This is the content of the Notes container.</p>
+                    <HomeNotes />
                 </div>
 
-                <div key="scratchPad" className="bg-white p-4 shadow-md rounded-md">
-                    <h2 className="text-2xl font-bold mb-4 ">Scratch Pad</h2>
-                    {/* Your Scratch Pad content goes here */}
-                    {/* Example content */}
-                    <p>This is the content of the Scratch Pad container.</p>
+                <div key="scratchPad" className="bg-yellow-200 p-2 shadow-md rounded-md">
+                    <ScratchPad />
                 </div>
 
                 <div key="recentlyCaptured" className="bg-white p-4 shadow-md rounded-md">
