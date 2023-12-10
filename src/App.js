@@ -10,10 +10,10 @@ const App = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  console.log(colorBgContainer)
+
   return (
     <Router>
-      <Layout className='main-layout'>
+      <Layout className='main-layout' style={{ background: colorBgContainer }}>
         <SideBar />
         <Layout className='content-area'>
           <Routes>

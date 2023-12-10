@@ -4,7 +4,6 @@ import { getTimeOfDay } from '../helpers';
 import moment from 'moment';
 import 'react-calendar/dist/Calendar.css';
 import Calendar from './Calendar';
-import { Button } from 'antd/es';
 import { CalendarFilled } from '@ant-design/icons';
 // import Calendar from 'react-calendar';
 
@@ -21,9 +20,10 @@ function StickyTop(props) {
             <div className={cs('flex justify-between absolute top-0 left-0 w-full p-4 stickyHeader')} style={textStyle}>
                 <h3>Good {getTimeOfDay()}, Mohamed!</h3>
                 <div className={cs('datTimeContainer relative')}>
-                    <Button type="primary" icon={<CalendarFilled />} onClick={toggleVisibility}>
+                    <button type='primary' className="CalenBtn" onClick={toggleVisibility}>
+                        <CalendarFilled />
                         {moment().format('dddd, D MMMM YYYY')}
-                    </Button>
+                    </button>
                     {isVisible && (
                         <div className={cs('calendarContainer absolute right-0')}>
                             <Calendar />

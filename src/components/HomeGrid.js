@@ -27,7 +27,7 @@ const HomeGrid = () => {
     };
 
     return (
-        <>
+        <div data-testid="home-grid" data-draggable={isDraggable.toString()}>
             <div className='hidden'>
                 <button onClick={handleReOrderClick}>ReOrder</button>
                 <button onClick={handleSaveClick}>Save</button>
@@ -65,8 +65,7 @@ const HomeGrid = () => {
                     <p>This is the content of the Recently Captured container.</p>
                 </div>
             </ReactGridLayout >
-        </>
-
+        </div>
     );
 };
 
