@@ -14,10 +14,16 @@ import {
 } from "react-icons/bs";
 import Profile from './Profile';
 import { useNavigate } from 'react-router-dom';
+import { detectMobile } from '../helpers';
 
 function SideBar() {
     const navigate = useNavigate();
-    const [collapsed, setCollapsed] = useState(false);
+
+    const url = window.location.href;
+    const valueAfterSlash = url.split('/').pop();
+    console.log(valueAfterSlash);
+
+    const [collapsed, setCollapsed] = useState(detectMobile());
     const { Sider } = Layout;
     const [isResizing, setIsResizing] = useState(false);
     const [width, setWidth] = useState(240); // Initial width
@@ -42,14 +48,14 @@ function SideBar() {
             if (newWidth < thresholdWidth) {
                 setWidth(collapsedWidth);
                 setCollapsed(true)
-            } else if(newWidth>thresholdWidth && newWidth<= minWidth) {
-                newWidth=210
+            } else if (newWidth > thresholdWidth && newWidth <= minWidth) {
+                newWidth = 210
                 setCollapsed(false)
             }
             if (newWidth >= minWidth && newWidth <= maxWidth) {
                 setWidth(newWidth);
             }
-            
+
         }
     };
 
@@ -89,7 +95,7 @@ function SideBar() {
                     theme="dark"
                     className='bg-primary'
                     mode="inline"
-                    defaultSelectedKeys={['3']}
+                    defaultSelectedKeys={valueAfterSlash || 'home'}
                     items={[
                         {
                             key: '2',
@@ -97,7 +103,7 @@ function SideBar() {
                             label: 'New',
                         },
                         {
-                            key: '3',
+                            key: 'home',
                             icon: <HomeFilled />,
                             label: 'Home',
                             onClick: () => {
@@ -105,7 +111,7 @@ function SideBar() {
                             }
                         },
                         {
-                            key: '4',
+                            key: 'shortCuts',
                             icon: <StarFilled />,
                             label: 'Shortcuts',
                             onClick: () => {
@@ -113,7 +119,7 @@ function SideBar() {
                             }
                         },
                         {
-                            key: '5',
+                            key: 'notes',
                             icon: <FileTextFilled />,
                             label: 'Notes',
                             onClick: () => {
@@ -121,7 +127,7 @@ function SideBar() {
                             }
                         },
                         {
-                            key: '6',
+                            key: 'tasks',
                             icon: <CheckCircleFilled />,
                             label: 'Tasks',
                             onClick: () => {

@@ -1,4 +1,3 @@
-
 export const getTimeOfDay = () => {
     const now = new Date();
     const hour = now.getHours();
@@ -36,3 +35,11 @@ export const calculateImageBrightness = (image) => {
 
     return sum / (imageData.length / 4);
 };
+
+
+export const detectMobile = () => {
+    if (typeof window !== 'undefined') {
+        return window.innerWidth <= 768;
+    }
+    return false;
+}

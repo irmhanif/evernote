@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GridLayout, { WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import ScratchPad from './ScratchPad';
 import HomeNotes from './HomeNotes';
+import { detectMobile } from '../helpers';
 
 const ReactGridLayout = WidthProvider(GridLayout);
 
 const HomeGrid = () => {
-    const [layout, setLayout] = useState([
+    const layoutProps = [
         { i: 'notes', x: 0, y: 0, w: 8, h: 8 },
         { i: 'scratchPad', x: 10, y: 0, w: 4, h: 8 },
-        { i: 'recentlyCaptured', x: 0, y: 4, w: 12, h: 14 },
-    ]);
+        // { i: 'recentlyCaptured', x: 0, y: 4, w: 12, h: 14 },
+    ]
+    const [layout, setLayout] = useState(layoutProps);
+
+    useEffect(() => {
+        if (detectMobile()) {
+            setLayout([
+                { i: 'notes', x: 0, y: 0, w: 12, h: 8 },
+                { i: 'scratchPad', x: 0, y: 8, w: 12, h: 8 }
+            ]);
+        }
+    }, [layout]);
 
     const [isDraggable, setIsDraggable] = useState(false);
 
@@ -54,12 +65,10 @@ const HomeGrid = () => {
                     <ScratchPad />
                 </div>
 
-                <div key="recentlyCaptured" className="bg-white p-4 shadow-md rounded-md">
+                {/* <div key="recentlyCaptured" className="bg-white p-4 shadow-md rounded-md">
                     <h2 className="text-2xl font-bold mb-4 ">Recently Captured</h2>
-                    {/* Your Recently Captured content goes here */}
-                    {/* Example content */}
                     <p>This is the content of the Recently Captured container.</p>
-                </div>
+                </div> */}
             </ReactGridLayout >
         </div>
     );

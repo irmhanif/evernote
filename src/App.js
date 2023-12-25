@@ -5,6 +5,7 @@ import { Layout, theme } from 'antd';
 import Home from './pages/Home';
 import SideBar from './components/SideBar';
 import NotFound from './pages/NotFound';
+import Notes from './pages/Notes';
 
 const App = () => {
   const {
@@ -18,6 +19,7 @@ const App = () => {
         <Layout className='content-area'>
           <Routes>
             <RouteV6 path="/" element={<Home />} />
+            <RouteV6 path="/notes" element={<Notes />} />
             <RouteV6 path="*" element={<NotFound />} />
           </Routes>
         </Layout>

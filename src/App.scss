@@ -128,13 +128,14 @@ body {
   font-family: "Quicksand", sans-serif;
   width: 250px;
   height: 270px;
+  z-index: 99;
 }
 .CalenBtn {
-  color: #fff;
-  background-color: #1677ff;
-  box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
-  box-sizing: border-box;
-  font-size: 14px;
+  color: #000;
+  background-color: #ffffff00;
+  /* box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1); */
+  /* box-sizing: border-box; */
+  font-size: 12px;
   height: 32px;
   padding: 4px 15px;
   border-radius: 6px;
@@ -148,10 +149,22 @@ body {
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;
   display: flex;
   justify-content: space-between;
-  width: 230px;
+  width: 205px;
   align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  body #HOME-CONTAINER .stickyHeader {
+    flex-wrap: wrap-reverse;
+    .datTimeContainer {
+      position: absolute !important;
+      right: 0;
+      top: 3px;
+    }
+  }
 }

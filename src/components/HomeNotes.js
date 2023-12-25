@@ -23,7 +23,7 @@ const HomeNotes = () => {
                                 {/* Display recent notes */}
                                 <div className="flex overflow-x-auto flex-nowrap">
                                     {recentNotes.map((note, index) => (
-                                        <div key={index} role='note' className="flex-shrink-0 w-44 h-40 bg-gray-200 m-2">
+                                        <div key={index} role='note' className="flex-shrink-0 w-40 h-40 bg-gray-200 m-2" style={{ width: '9rem' }}>
                                             {note}
                                         </div>
                                     ))}
@@ -39,7 +39,7 @@ const HomeNotes = () => {
                                 {/* Display suggested notes */}
                                 <div className="flex overflow-x-auto flex-nowrap">
                                     {suggestedNotes.map((note, index) => (
-                                        <div key={index} role='note' className="flex-shrink-0 w-44 h-40 bg-gray-200 m-2">
+                                        <div key={index} role='note' className="flex-shrink-0 w-40 h-40 bg-gray-200 m-2" style={{ width: '9rem' }}>
                                             {note}
                                         </div>
                                     ))}
