@@ -68,14 +68,19 @@ body {
   }
   .collapseButton {
     position: absolute;
-    right: -10px;
+    right: -6px;
     background: #262626;
-    padding: 8px 2px;
-    height: 40px;
-    width: 26px !important;
+    padding: 5px 0px;
+    height: 31px;
+    width: 16px !important;
     color: #fff;
-    bottom: 29px;
+    top: 49%;
     transition: 0.5s;
+    outline: none;
+    &:active,
+    &:hover {
+      background: #262626 !important;
+    }
   }
   .sideBarResizer {
     width: 2px;

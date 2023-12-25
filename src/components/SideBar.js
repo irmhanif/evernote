@@ -139,7 +139,7 @@ function SideBar() {
                 <Button
                     type="text"
                     icon={collapsed ? <BsChevronRight /> : <BsChevronLeft />}
-                    className={cs('collapseButton hidden group-hover:inline-block ')}
+                    className={cs('collapseButton ')}
                     onClick={() => {
                         setCollapsed(!collapsed)
                         setWidth(240)
