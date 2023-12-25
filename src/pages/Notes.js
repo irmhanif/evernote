@@ -4,11 +4,15 @@ import { GrDocumentNotes } from "react-icons/gr";
 import { TbFilterSearch } from "react-icons/tb";
 import { BsSortUp } from "react-icons/bs";
 import { detectMobile } from '../helpers';
+import createNotes from '../assets/createNotesF.jpg'
+import { dummyNotes } from '../mockData/data';
+import NotesList from '../components/Notes';
 
 
 const Notes = () => {
     const [showSort, setShowSort] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
+    const [notes, setNotes] = useState([]);
 
     const notesRef = useRef(null);
 
@@ -34,38 +38,54 @@ const Notes = () => {
         setShowFilter(!showFilter);
     };
 
-    const [notes] = useState([]);
 
     const isMobile = detectMobile()
 
+    const createNote = () => {
+        setNotes(dummyNotes)
+    }
+
     return (
         <div ref={notesRef}>
-            <div className='p-2' style={{ width: isMobile ? '100%' : '30%' }}>
-                <div>
-                    <h2><GrDocumentNotes /> Notes</h2>
-                </div>
-                <div className='flex justify-between items-center'>
-                    <p className="m-0">{notes.length} note{notes.length !== 1 && 's'}</p>
-                    <div className='flex justify-between items-center w-14'>
-                        <div>
-                            <BsSortUp onClick={handleSortClick} className='w-6 h-6' />
-                            {showSort && <Sort />}
-                        </div>
-                        <div>
-                            <TbFilterSearch onClick={handleFilterClick} className='w-6 h-6' />
-                            {showFilter && <Sort />}
+            <div className='notesSidebar' style={{ width: isMobile ? '100%' : '20%' }}>
+                <div className='p-2 notesHeader' >
+                    <div>
+                        <h2><GrDocumentNotes /> Notes</h2>
+                    </div>
+                    <div className='flex justify-between items-center'>
+                        <p className="m-0">{notes.length} note{notes.length !== 1 && 's'}</p>
+                        <div className='flex justify-between items-center w-14'>
+                            <div>
+                                <BsSortUp onClick={handleSortClick} className='w-6 h-6' />
+                                {showSort && <Sort />}
+                            </div>
+                            <div>
+                                <TbFilterSearch onClick={handleFilterClick} className='w-6 h-6' />
+                                {showFilter && <Sort />}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div className='notesListContainer'  >
+                    {notes.length === 0 ?
+                        <div className='emptyNotes'>
+                            <div className='mt-3 createNoteImgContainer'>
+                                <img src={createNotes} alt='create notes' className='createNoteImg' />
+                                <p>Create your first note
+                                    Click the <span className='text-blue-500 underline' onClick={createNote}>+ New Note</span> button in the sidebar to get started.
+                                </p>
+                            </div>
+                        </div>
+
+                        : <>
+                            <NotesList notes={notes} />
+                        </>
+                    }
+
+
+                </div >
             </div>
-            <div className='border-t border-solid border-gray-500' style={{ borderRight: 0, borderLeft: 0, borderBottom: 0 }}>
-                <ul>
-                    <li>Note 1</li>
-                    <li>Note 2</li>
-                    <li>Note 3</li>
-                </ul>
-            </div >
-            <div style={{ width: isMobile ? '0' : '70%' }}></div>
+            <div style={{ width: isMobile ? '0' : '80%' }}></div>
         </div>
     );
 };
