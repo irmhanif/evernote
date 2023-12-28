@@ -7,6 +7,7 @@ import { detectMobile } from '../helpers';
 import createNotes from '../assets/createNotesF.jpg'
 import { dummyNotes } from '../mockData/data';
 import NotesList from '../components/Notes';
+import RichEditor from '../components/Editor';
 
 
 const Notes = () => {
@@ -46,7 +47,7 @@ const Notes = () => {
     }
 
     return (
-        <div ref={notesRef}>
+        <div ref={notesRef} className='flex'>
             <div className='notesSidebar' style={{ width: isMobile ? '100%' : '20%' }}>
                 <div className='p-2 notesHeader' >
                     <div>
@@ -85,7 +86,12 @@ const Notes = () => {
 
                 </div >
             </div>
-            <div style={{ width: isMobile ? '0' : '80%' }}></div>
+            <div style={{ width: isMobile ? '0' : '80%' }} className='p-2'>
+                <div className='notesContent'>
+                    <h2 className='text-center'>Select a note to view</h2>
+                    <RichEditor />
+                </div>
+            </div>
         </div>
     );
 };
