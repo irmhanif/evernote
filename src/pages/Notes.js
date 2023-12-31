@@ -86,7 +86,7 @@ const Notes = () => {
 
                 </div >
             </div>
-            <div style={{ width: isMobile ? '0' : '80%' }} className='p-2'>
+            <div style={{ width: isMobile ? '0' : '80%' }} className=''>
                 <div className='notesContent'>
                     <RichEditor />
                 </div>

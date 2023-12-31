@@ -192,6 +192,12 @@ body {
   }
 }
 
+.notesContent {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+}
+
 @media screen and (max-width: 768px) {
   body #HOME-CONTAINER .stickyHeader {
     flex-wrap: wrap-reverse;
