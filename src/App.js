@@ -18,9 +18,9 @@ const App = () => {
         <SideBar />
         <Layout className='content-area'>
           <Routes>
-            <RouteV6 path="/" element={<Home />} />
-            <RouteV6 path="/notes" element={<Notes />} />
             <RouteV6 path="*" element={<NotFound />} />
+            <RouteV6 path="/notes" element={<Notes />} />
+            <RouteV6 path="/" element={<Home />} />
           </Routes>
         </Layout>
       </Layout>
