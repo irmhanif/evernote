@@ -29,7 +29,6 @@ const RichTextEditor = () => {
             // Append the new component after the target element
             if (targetElement && !isInjected) {
                 targetElement.parentNode.insertBefore(injectedComponent, targetElement.nextSibling);
-                targetElement.appendChild(injectedComponent);
                 isInjected = true; // Mark as injected
             }
         }
@@ -64,7 +63,7 @@ const RichTextEditor = () => {
                 theme="snow"
                 value={value}
                 onChange={setValue}
-                placeholder="Enter text..."
+                placeholder="Start writing..."
                 bounds={'.app'}
                 modules={modules}
                 ref={targetRef}

@@ -14,6 +14,7 @@ const Notes = () => {
     const [showSort, setShowSort] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
     const [notes, setNotes] = useState([]);
+    const [showEditor, setShowEditor] = useState(false)
 
     const notesRef = useRef(null);
 
@@ -44,53 +45,65 @@ const Notes = () => {
 
     const createNote = () => {
         setNotes(dummyNotes)
+        setShowEditor(true)
+    }
+
+    const renderListSections = () => {
+        return (
+            <div className='notesListContainer'  >
+                {notes.length === 0 ?
+                    <div className='emptyNotes'>
+                        <div className='mt-3 createNoteImgContainer'>
+                            <img src={createNotes} alt='create notes' className='createNoteImg' />
+                            <p>Create your first note
+                                Click the <span className='text-blue-500 underline' onClick={createNote}>+ New Note</span> button in the sidebar to get started.
+                            </p>
+                        </div>
+                    </div>
+
+                    : <>
+                        <NotesList notes={notes} />
+                    </>
+                }
+
+
+            </div >
+        )
     }
 
     return (
-        <div ref={notesRef} className='flex'>
-            <div className='notesSidebar' style={{ width: isMobile ? '100%' : '20%' }}>
-                <div className='p-2 notesHeader' >
-                    <div>
-                        <h2><GrDocumentNotes /> Notes</h2>
-                    </div>
-                    <div className='flex justify-between items-center'>
-                        <p className="m-0">{notes.length} note{notes.length !== 1 && 's'}</p>
-                        <div className='flex justify-between items-center w-14'>
-                            <div>
-                                <BsSortUp onClick={handleSortClick} className='w-6 h-6' />
-                                {showSort && <Sort />}
-                            </div>
-                            <div>
-                                <TbFilterSearch onClick={handleFilterClick} className='w-6 h-6' />
-                                {showFilter && <Sort />}
+        <div ref={notesRef} className={isMobile ? 'mobileNotes' : 'flex'}>
+            {((isMobile && !showEditor) || (!isMobile)) &&
+                <div className='notesSidebar' style={{ width: isMobile ? '100%' : '20%' }}>
+                    <div className='p-2 notesHeader' >
+                        <div>
+                            <h2><GrDocumentNotes /> Notes</h2>
+                        </div>
+                        <div className='flex justify-between items-center'>
+                            <p className="m-0">{notes.length} note{notes.length !== 1 && 's'}</p>
+                            <div className='flex justify-between items-center w-14'>
+                                <div>
+                                    <BsSortUp onClick={handleSortClick} className='w-6 h-6' />
+                                    {showSort && <Sort />}
+                                </div>
+                                <div>
+                                    <TbFilterSearch onClick={handleFilterClick} className='w-6 h-6' />
+                                    {showFilter && <Sort />}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='notesListContainer'  >
-                    {notes.length === 0 ?
-                        <div className='emptyNotes'>
-                            <div className='mt-3 createNoteImgContainer'>
-                                <img src={createNotes} alt='create notes' className='createNoteImg' />
-                                <p>Create your first note
-                                    Click the <span className='text-blue-500 underline' onClick={createNote}>+ New Note</span> button in the sidebar to get started.
-                                </p>
-                            </div>
-                        </div>
-
-                        : <>
-                            <NotesList notes={notes} />
-                        </>
+                    {
+                        renderListSections()
                     }
-
-
-                </div >
-            </div>
-            <div style={{ width: isMobile ? '0' : '80%' }} className=''>
+                </div>
+            }
+            {showEditor && <div style={{ width: isMobile ? '100%' : '80%' }} className=''>
                 <div className='notesContent'>
                     <RichEditor />
                 </div>
-            </div>
+            </div>}
+
         </div>
     );
 };
