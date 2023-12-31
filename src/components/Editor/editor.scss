@@ -1,8 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&family=Ubuntu:wght@300;400&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&family=Cedarville+Cursive&family=Dancing+Script&family=Pacifico&family=Raleway&family=Roboto&family=Single+Day&family=Ubuntu:wght@300;400&display=swap");
 /* Set default font-family */
 .quill .ql-editor {
-  font-family: "Ubuntu";
+  font-family: "Raleway";
 }
 
 /* Set dropdown font-families */
@@ -22,13 +21,51 @@
   font-family: "Roboto", cursive;
   content: "Roboto";
 }
+.ql-picker.ql-font .ql-picker-label[data-value="Pacifico"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="Pacifico"]::before {
+  font-family: "Pacifico", cursive;
+  content: "Pacifico";
+}
+
+.ql-picker.ql-font .ql-picker-label[data-value="BadScript"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="BadScript"]::before {
+  font-family: "Bad Script", cursive;
+  content: "BadScript";
+}
+.ql-picker.ql-font .ql-picker-label[data-value="CedarvilleCursive"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="CedarvilleCursive"]::before {
+  font-family: "Cedarville Cursive", cursive;
+  content: "CedarvilleCursive";
+}
+.ql-picker.ql-font .ql-picker-label[data-value="DancingScript"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="DancingScript"]::before {
+  font-family: "Dancing Script", cursive;
+  content: "DancingScript";
+}
 /* Set content font-families */
+.ql-font-BadScript {
+  font-family: "Bad Script";
+}
+.ql-font-CedarvilleCursive {
+  font-family: "Cedarville Cursive";
+}
+.ql-font-DancingScript {
+  font-family: "Dancing Script";
+}
+
 .ql-font-Raleway {
   font-family: "Raleway";
 }
 .ql-font-Roboto {
   font-family: "Roboto";
 }
+.ql-font-Ubuntu {
+  font-family: "Ubuntu";
+}
+.ql-font-Pacifico {
+  font-family: "Pacifico";
+}
+
 /* We do not set Courier since it is the default font */
 
 .quill {
@@ -54,7 +91,6 @@
 
 .titleInput {
   width: 100%;
-  z-index: 9999;
   box-sizing: border-box;
   padding: 12px 15px;
 

@@ -6,7 +6,7 @@ import TitleInput from './TitleInput'; // Import the TitleInput component
 import ReactDOM from 'react-dom/client';
 
 var Font = Quill.import('formats/font');
-Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto'];
+Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto', 'BadScript', 'CedarvilleCursive', 'Pacifico', 'DancingScript'];
 Quill.register(Font, true);
 
 const RichTextEditor = () => {
