@@ -1,6 +1,6 @@
 export const dummyNotes = [
     {
-        title: "Object 1",
+        title: "Note 1",
         size: 10,
         url: "https://example.com/object1",
         dateUpdated: "2022-01-01",
@@ -29,7 +29,7 @@ export const dummyNotes = [
         ]
     },
     {
-        title: "Object 2",
+        title: "Note 2",
         size: 20,
         url: "https://example.com/object2",
         dateUpdated: "2022-02-01",
@@ -58,7 +58,7 @@ export const dummyNotes = [
         ]
     },
     {
-        title: "Object 3",
+        title: "Note 3",
         size: 30,
         url: "https://example.com/object3",
         dateUpdated: "2022-03-01",
@@ -87,7 +87,7 @@ export const dummyNotes = [
         ]
     },
     {
-        title: "Object 4",
+        title: "Note 4",
         size: 40,
         url: "https://example.com/object4",
         dateUpdated: "2022-04-01",

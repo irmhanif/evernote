@@ -10,63 +10,73 @@ const TableView = () => {
         () => [
             {
                 accessorKey: 'title',
-                header: 'title',
-                size: 150,
-            },
-            {
-                accessorKey: 'size',
-                header: 'size',
-                size: 170,
-            },
-            {
-                accessorKey: 'url',
-                header: 'url',
+                header: 'Title',
                 size: 150,
             },
             {
                 accessorKey: 'dateUpdated',
-                header: 'dateUpdated',
+                header: 'Date Updated',
                 size: 300,
             },
             {
-                accessorKey: 'dateCreated',
-                header: 'dateCreated',
-                size: 250,
-            },
-            {
-                accessorKey: 'location',
-                header: 'location',
+                accessorKey: 'tags',
+                header: 'Tags',
                 size: 300,
             },
-            {
-                accessorKey: 'reminderDate',
-                header: 'reminderDate',
-            },
-            {
-                accessorKey: 'createdBy',
-                header: 'createdBy',
-            },
-            {
-                accessorKey: 'updatedBy',
-                header: 'updatedBy',
-                size: 350,
-            },
-            {
-                accessorKey: 'description',
-                header: 'description',
-            },
-            {
-                accessorKey: 'canvas',
-                header: 'canvas',
-            },
-            {
-                accessorKey: 'audioLink',
-                header: 'audioLink',
-            },
-            {
-                accessorKey: 'isActive',
-                header: 'Is Active',
-            },
+            // {
+            //     accessorKey: 'size',
+            //     header: 'size',
+            //     size: 170,
+            // },
+            // {
+            //     accessorKey: 'url',
+            //     header: 'url',
+            //     size: 150,
+            // },
+            // {
+            //     accessorKey: 'dateUpdated',
+            //     header: 'dateUpdated',
+            //     size: 300,
+            // },
+            // {
+            //     accessorKey: 'dateCreated',
+            //     header: 'dateCreated',
+            //     size: 250,
+            // },
+            // {
+            //     accessorKey: 'location',
+            //     header: 'location',
+            //     size: 300,
+            // },
+            // {
+            //     accessorKey: 'reminderDate',
+            //     header: 'reminderDate',
+            // },
+            // {
+            //     accessorKey: 'createdBy',
+            //     header: 'createdBy',
+            // },
+            // {
+            //     accessorKey: 'updatedBy',
+            //     header: 'updatedBy',
+            //     size: 350,
+            // },
+            // {
+            //     accessorKey: 'description',
+            //     header: 'description',
+            // },
+            // {
+            //     accessorKey: 'canvas',
+            //     header: 'canvas',
+            // },
+            // {
+            //     accessorKey: 'audioLink',
+            //     header: 'audioLink',
+            // },
+            // {
+            //     accessorKey: 'isActive',
+            //     header: 'Is Active',
+            // },
         ],
         [],
         //end
@@ -101,18 +111,14 @@ const TableView = () => {
         defaultDisplayColumn: { enableResizing: true },
         enableBottomToolbar: false,
         enableColumnResizing: true,
-        enableColumnVirtualization: true,
-        enableGlobalFilterModes: true,
+        enableColumnVirtualization: false,
+        enableGlobalFilterModes: false,
         enablePagination: false,
-        enableColumnPinning: true,
-        enableRowNumbers: true,
-        enableRowVirtualization: true,
+        enableColumnPinning: false,
+        enableRowVirtualization: false,
         muiTableContainerProps: { sx: { maxHeight: '600px' } },
         onSortingChange: setSorting,
         state: { isLoading, sorting },
-        rowVirtualizerInstanceRef, //optional
-        rowVirtualizerOptions: { overscan: 5 }, //optionally customize the row virtualizer
-        columnVirtualizerOptions: { overscan: 2 }, //optionally customize the column virtualizer
     });
 
     return <MaterialReactTable table={table} />;

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bad+Script&family=Cedarville+Cursive&family=Dancing+Script&family=Pacifico&family=Raleway&family=Roboto&family=Single+Day&family=Ubuntu:wght@300;400&display=swap");
 /* Set default font-family */
 .quill .ql-editor {
-  font-family: "Raleway";
+  font-family: "Pacifico";
 }
 
 /* Set dropdown font-families */
@@ -92,7 +92,7 @@
 .titleInput {
   width: 100%;
   box-sizing: border-box;
-  padding: 12px 15px;
+  padding: 12px 15px !important;
 
   .MuiInput-input {
     border: none;
