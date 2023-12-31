@@ -10,6 +10,28 @@ Quill.register(Font, true);
 const RichTextEditor = () => {
     const [value, setValue] = useState('');
 
+    const modules = {
+        toolbar: [
+            [{ 'header': '1' }, { 'header': '2' }, { 'font': Font.whitelist }],
+            [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' },
+            { 'indent': '-1' }, { 'indent': '+1' }],
+            ['link', 'image', 'video'],
+            ['code-block'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'align': [] }],
+            ['clean'],
+        ],
+    }
+    const formats = [
+        'header', 'font', 'size',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image', 'video', 'code - block',
+        'color', 'background',
+        'align',
+    ]
 
     return (
         <ReactQuill
@@ -18,33 +40,11 @@ const RichTextEditor = () => {
             onChange={setValue}
             placeholder="Enter text..."
             bounds={'.app'}
-            modules={RichTextEditor.modules}
-            formats={RichTextEditor.formats}
-
+            modules={modules}
+            formats={formats}
         />
     );
 };
 
-RichTextEditor.modules = {
-    toolbar: [
-        [{ 'header': '1' }, { 'header': '2' }, { 'font': Font.whitelist }],
-        [{ size: [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' },
-        { 'indent': '-1' }, { 'indent': '+1' }],
-        ['link', 'image', 'video'],
-        ['clean']
-    ]
-}
-/* 
- * Quill editor formats
- * See https://quilljs.com/docs/formats/
- */
-RichTextEditor.formats = [
-    'header', 'font', 'size',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image', 'video'
-]
 
 export default RichTextEditor;
