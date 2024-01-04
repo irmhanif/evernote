@@ -48,6 +48,10 @@ const Notes = () => {
         setShowEditor(true)
     }
 
+    const handleClose = () => {
+        setShowEditor(false)
+    }
+
     const renderListSections = () => {
         return (
             <div className='notesListContainer'  >
@@ -100,7 +104,7 @@ const Notes = () => {
             }
             {showEditor && <div style={{ width: isMobile ? '100%' : '80%' }} className=''>
                 <div className='notesContent'>
-                    <RichEditor />
+                    <RichEditor handleCloseBtn={handleClose} />
                 </div>
             </div>}
 
