@@ -11,7 +11,7 @@ Quill.register(Font, true);
 
 
 const RichTextEditor = (props) => {
-    const { handleCloseBtn, data, handleTitleChange = () => { } } = props;
+    const { handleCloseBtn, data, handleTitleChange } = props;
     const [value, setValue] = useState('');
     const targetRef = useRef(null);
 
@@ -33,7 +33,8 @@ const RichTextEditor = (props) => {
                 isInjected = true; // Mark as injected
             }
         }
-    }, [data.title, handleTitleChange])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const handleClick = () => { }
 
     const myUndo = () => {
@@ -99,7 +100,8 @@ const RichTextEditor = (props) => {
                 },
             },
         }),
-        [handleCloseBtn]
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
     );
 
     const formats = [

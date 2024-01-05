@@ -36,7 +36,13 @@ const reducer = (state, action) => {
 const Notes = () => {
     const [showEditor, setShowEditor] = useState(false);
     const [currentNote, setCurrentNote] = useState(null);
-    const [notes, dispatch] = useReducer(reducer, initialState);
+    const [notes, dispatch] = useReducer(reducer, initialState, () => {
+        const sessionState = sessionStorage.getItem('notes');
+        if (sessionState) {
+            return JSON.parse(sessionState);
+        }
+        return initialState;
+    });
     const notesRef = useRef(null);
 
 
@@ -85,10 +91,6 @@ const Notes = () => {
     };
 
     const handleTitleChange = (value) => {
-        setCurrentNote({
-            ...currentNote,
-            title: value,
-        });
         dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote.id, updatedNote: { title: value } } });
 
     }
