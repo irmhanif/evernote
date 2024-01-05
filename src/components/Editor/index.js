@@ -2,9 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './editor.scss';
-import TitleInput from './TitleInput'; // Import the TitleInput component
+import TitleInput from './TitleInput';
 import ReactDOM from 'react-dom/client';
-import { LiaWindowCloseSolid } from "react-icons/lia";
 
 var Font = Quill.import('formats/font');
 Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto', 'BadScript', 'CedarvilleCursive', 'Pacifico', 'DancingScript'];
@@ -22,7 +21,6 @@ const RichTextEditor = (props) => {
             // The component to be appended
             const injectedComponent = document.createElement('div');
             injectedComponent.id = 'title-input';
-            // injectedComponent.innerHTML = `<TitleInput />`; // Append the TitleInput component
             const elem = document.getElementById('title-input');
             const root = ReactDOM.createRoot(elem);
             root.render(<TitleInput />);
