@@ -3,14 +3,12 @@ import {
     MaterialReactTable,
     useMaterialReactTable,
 } from 'material-react-table';
-import { dummyNotes } from '../../mockData/data';
 
 const TableView = (props) => {
     const { columns, data } = props
     const tblColumns = useMemo(
         () => columns,
-        [],
-        //end
+        [columns],
     );
 
     //optionally access the underlying virtualizer instance
@@ -25,7 +23,7 @@ const TableView = (props) => {
             setTblData(data);
             setIsLoading(false);
         }
-    }, []);
+    }, [data]);
 
     useEffect(() => {
         //scroll to the top of the table when the sorting changes
