@@ -3,9 +3,8 @@ import Sort from '../components/Sort';
 import { GrDocumentNotes } from "react-icons/gr";
 import { TbFilterSearch } from "react-icons/tb";
 import { BsSortUp } from "react-icons/bs";
-import { detectMobile } from '../helpers';
+import { detectMobile, generateBasicNote } from '../helpers';
 import createNotes from '../assets/createNotesF.jpg'
-import { dummyNotes } from '../mockData/data';
 import NotesList from '../components/Notes';
 import RichEditor from '../components/Editor';
 
@@ -44,7 +43,10 @@ const Notes = () => {
     const isMobile = detectMobile()
 
     const createNote = () => {
-        setNotes(dummyNotes)
+        console.log(generateBasicNote())
+
+        const newNote = generateBasicNote();
+        setNotes([...notes, newNote])
         setShowEditor(true)
     }
 
@@ -69,8 +71,6 @@ const Notes = () => {
                         <NotesList notes={notes} />
                     </>
                 }
-
-
             </div >
         )
     }

@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getTimeOfDay = () => {
     const now = new Date();
     const hour = now.getHours();
@@ -42,4 +44,34 @@ export const detectMobile = () => {
         return window.innerWidth <= 768;
     }
     return false;
+}
+
+export const uuidv4 = () => {
+    if (typeof window !== 'undefined') {
+        return window.crypto.getRandomValues(new Uint32Array(1))[0];
+    }
+    return 0;
+}
+
+export const generateBasicNote = () => {
+    return {
+        id: uuidv4(),
+        title: 'Untitled',
+        content: '',
+        dateCreated: moment().format('MM-DD-YY HH:mm'),
+        dateUpdated: moment().format('MMM DD YY HH:mm'),
+        reminderDate: null,
+        location: null,
+        createdBy: 'admin',
+        updatedBy: 'admin',
+        description: '',
+        canvas: '',
+        audioLink: '',
+        isActive: true,
+        size: 0,
+        url: '',
+        tags: [],
+        attachedImages: [],
+        comments: []
+    }
 }

@@ -5,79 +5,10 @@ import {
 } from 'material-react-table';
 import { dummyNotes } from '../../mockData/data';
 
-const TableView = () => {
-    const columns = useMemo(
-        () => [
-            {
-                accessorKey: 'title',
-                header: 'Title',
-                size: 150,
-            },
-            {
-                accessorKey: 'dateUpdated',
-                header: 'Date Updated',
-                size: 300,
-            },
-            {
-                accessorKey: 'tags',
-                header: 'Tags',
-                size: 300,
-            },
-            // {
-            //     accessorKey: 'size',
-            //     header: 'size',
-            //     size: 170,
-            // },
-            // {
-            //     accessorKey: 'url',
-            //     header: 'url',
-            //     size: 150,
-            // },
-            // {
-            //     accessorKey: 'dateUpdated',
-            //     header: 'dateUpdated',
-            //     size: 300,
-            // },
-            // {
-            //     accessorKey: 'dateCreated',
-            //     header: 'dateCreated',
-            //     size: 250,
-            // },
-            // {
-            //     accessorKey: 'location',
-            //     header: 'location',
-            //     size: 300,
-            // },
-            // {
-            //     accessorKey: 'reminderDate',
-            //     header: 'reminderDate',
-            // },
-            // {
-            //     accessorKey: 'createdBy',
-            //     header: 'createdBy',
-            // },
-            // {
-            //     accessorKey: 'updatedBy',
-            //     header: 'updatedBy',
-            //     size: 350,
-            // },
-            // {
-            //     accessorKey: 'description',
-            //     header: 'description',
-            // },
-            // {
-            //     accessorKey: 'canvas',
-            //     header: 'canvas',
-            // },
-            // {
-            //     accessorKey: 'audioLink',
-            //     header: 'audioLink',
-            // },
-            // {
-            //     accessorKey: 'isActive',
-            //     header: 'Is Active',
-            // },
-        ],
+const TableView = (props) => {
+    const { columns, data } = props
+    const tblColumns = useMemo(
+        () => columns,
         [],
         //end
     );
@@ -85,13 +16,13 @@ const TableView = () => {
     //optionally access the underlying virtualizer instance
     const rowVirtualizerInstanceRef = useRef(null);
 
-    const [data, setData] = useState([]);
+    const [tblData, setTblData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [sorting, setSorting] = useState([]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            setData(dummyNotes);
+            setTblData(data);
             setIsLoading(false);
         }
     }, []);
@@ -106,9 +37,9 @@ const TableView = () => {
     }, [sorting]);
 
     const table = useMaterialReactTable({
-        columns,
-        data, //10,000 rows
-        defaultDisplayColumn: { enableResizing: true },
+        columns: tblColumns,
+        data: tblData,
+        defaultDisplayColumn: { enableResizing: false },
         enableBottomToolbar: false,
         enableColumnResizing: true,
         enableColumnVirtualization: false,
@@ -119,6 +50,13 @@ const TableView = () => {
         muiTableContainerProps: { sx: { maxHeight: '600px' } },
         onSortingChange: setSorting,
         state: { isLoading, sorting },
+        enableGlobalFilter: true, // Disable search functionality
+        enableFullScreenToggle: false, // Disable toggle columns functionality
+        enableSorting: true,
+        enableColumnActions: false,
+        enableHiding: false,
+        enableDensityToggle: false,
+        initialState: { density: 'compact' },
     });
 
     return <MaterialReactTable table={table} />;

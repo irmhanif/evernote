@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import './editor.scss';
 import TitleInput from './TitleInput'; // Import the TitleInput component
 import ReactDOM from 'react-dom/client';
+import { LiaWindowCloseSolid } from "react-icons/lia";
 
 var Font = Quill.import('formats/font');
 Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto', 'BadScript', 'CedarvilleCursive', 'Pacifico', 'DancingScript'];
