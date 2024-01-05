@@ -1,8 +1,5 @@
-import React, { useEffect, useRef, useState, useReducer } from 'react';
-import Sort from '../components/Sort';
+import React, { useRef, useState, useReducer } from 'react';
 import { GrDocumentNotes } from "react-icons/gr";
-import { TbFilterSearch } from "react-icons/tb";
-import { BsSortUp } from "react-icons/bs";
 import { detectMobile, generateBasicNote } from '../helpers';
 import createNotes from '../assets/createNotesF.jpg'
 import NotesList from '../components/Notes';
@@ -14,48 +11,34 @@ const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD_NOTE':
             const newNote = generateBasicNote();
-            const updatedNotes = [...state, newNote];
+            sessionStorage.setItem('notes', JSON.stringify([...state, newNote]));
+            return [...state, newNote];
+        case 'UPDATE_NOTE':
+            const updatedNotes = state.map((note) => {
+                if (note.id === action.payload.id) {
+                    return {
+                        ...note,
+                        ...action.payload.updatedNote,
+                    };
+                }
+                return note;
+            });
             sessionStorage.setItem('notes', JSON.stringify(updatedNotes));
             return updatedNotes;
-        case 'REMOVE_NOTE':
-            const filteredNotes = state.filter(note => note.id !== action.payload);
+        case 'DELETE_NOTE':
+            const filteredNotes = state.filter((note) => note.id !== action.payload.id);
             sessionStorage.setItem('notes', JSON.stringify(filteredNotes));
             return filteredNotes;
         default:
             return state;
     }
 };
-
 const Notes = () => {
-    const [showSort, setShowSort] = useState(false);
-    const [showFilter, setShowFilter] = useState(false);
     const [showEditor, setShowEditor] = useState(false);
+    const [currentNote, setCurrentNote] = useState(null);
     const [notes, dispatch] = useReducer(reducer, initialState);
     const notesRef = useRef(null);
 
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (notesRef.current && !notesRef.current.contains(event.target)) {
-                setShowSort(false);
-                setShowFilter(false);
-            }
-        }
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
-    const handleSortClick = (event) => {
-        event.stopPropagation();
-        setShowSort(!showSort);
-    };
-
-    const handleFilterClick = (event) => {
-        event.stopPropagation();
-        setShowFilter(!showFilter);
-    };
 
     const isMobile = detectMobile();
 
@@ -67,6 +50,14 @@ const Notes = () => {
     const handleClose = () => {
         setShowEditor(false);
     };
+
+    const handleRowClick = (row) => {
+        console.log('rowClick', row.title)
+        setShowEditor(true);
+
+        setCurrentNote(row);
+
+    }
 
     const renderListSections = () => {
         return (
@@ -86,12 +77,21 @@ const Notes = () => {
                     </div>
                 ) : (
                     <>
-                        <NotesList notes={notes} />
+                        <NotesList notes={notes} onRowClick={handleRowClick} />
                     </>
                 )}
             </div>
         );
     };
+
+    const handleTitleChange = (value) => {
+        setCurrentNote({
+            ...currentNote,
+            title: value,
+        });
+        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote.id, updatedNote: { title: value } } });
+
+    }
 
     return (
         <div ref={notesRef} className={isMobile ? 'mobileNotes' : 'flex'}>
@@ -107,16 +107,6 @@ const Notes = () => {
                             <p className='m-0'>
                                 {notes.length} note{notes.length !== 1 && 's'}
                             </p>
-                            <div className='flex justify-between items-center w-14'>
-                                <div>
-                                    <BsSortUp onClick={handleSortClick} className='w-6 h-6' />
-                                    {showSort && <Sort />}
-                                </div>
-                                <div>
-                                    <TbFilterSearch onClick={handleFilterClick} className='w-6 h-6' />
-                                    {showFilter && <Sort />}
-                                </div>
-                            </div>
                         </div>
                     </div>
                     {
@@ -126,7 +116,7 @@ const Notes = () => {
             )}
             {showEditor && <div style={{ width: isMobile ? '100%' : '80%' }} className=''>
                 <div className='notesContent'>
-                    <RichEditor handleCloseBtn={handleClose} />
+                    <RichEditor handleCloseBtn={handleClose} data={currentNote} handleTitleChange={handleTitleChange} />
                 </div>
             </div>}
         </div>

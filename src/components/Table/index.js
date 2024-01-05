@@ -5,7 +5,7 @@ import {
 } from 'material-react-table';
 
 const TableView = (props) => {
-    const { columns, data } = props
+    const { columns, data, onRowClick } = props
     const tblColumns = useMemo(
         () => columns,
         [columns],
@@ -34,6 +34,12 @@ const TableView = (props) => {
         }
     }, [sorting]);
 
+    const handleRowClick = (e, row) => {
+        const { original } = row
+        console.log('e', original)
+        onRowClick(original)
+    }
+
     const table = useMaterialReactTable({
         columns: tblColumns,
         data: tblData,
@@ -55,6 +61,15 @@ const TableView = (props) => {
         enableHiding: false,
         enableDensityToggle: false,
         initialState: { density: 'compact' },
+        muiTableBodyRowProps: ({ row }) => ({
+            onClick: (event) => {
+                console.log('event', row.id)
+                handleRowClick(event, row);
+            },
+            sx: {
+                cursor: 'pointer', //you might want to change the cursor too when adding an onClick
+            },
+        }),
     });
 
     return <MaterialReactTable table={table} />;

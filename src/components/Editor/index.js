@@ -11,6 +11,7 @@ Quill.register(Font, true);
 
 
 const RichTextEditor = (props) => {
+    const { handleCloseBtn, data, handleTitleChange = () => { } } = props;
     const [value, setValue] = useState('');
     const targetRef = useRef(null);
 
@@ -23,7 +24,7 @@ const RichTextEditor = (props) => {
             injectedComponent.id = 'title-input';
             const elem = document.getElementById('title-input');
             const root = ReactDOM.createRoot(elem);
-            root.render(<TitleInput />);
+            root.render(<TitleInput value={data.title} handleChange={handleTitleChange} />);
             const targetElement = document.querySelector('.ql-toolbar');
 
             // Append the new component after the target element
@@ -32,7 +33,7 @@ const RichTextEditor = (props) => {
                 isInjected = true; // Mark as injected
             }
         }
-    }, [])
+    }, [data.title, handleTitleChange])
     const handleClick = () => { }
 
     const myUndo = () => {
@@ -86,7 +87,7 @@ const RichTextEditor = (props) => {
                 handlers: {
                     image: handleClick,
                     close: () => {
-                        props?.handleCloseBtn();
+                        handleCloseBtn();
                     },
                     undo: myUndo,
                     redo: myRedo,
@@ -98,7 +99,7 @@ const RichTextEditor = (props) => {
                 },
             },
         }),
-        [props]
+        [handleCloseBtn]
     );
 
     const formats = [

@@ -2,7 +2,7 @@ import React from 'react';
 import TableView from '../Table';
 
 const NotesList = (props) => {
-    const { notes } = props
+    const { notes, onRowClick } = props
 
     const columns = [
         {
@@ -76,7 +76,7 @@ const NotesList = (props) => {
         // },
     ];
     return (
-        <TableView columns={columns} data={notes} />
+        <TableView columns={columns} data={notes} onRowClick={onRowClick} />
     );
 };
 
