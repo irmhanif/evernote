@@ -21,7 +21,6 @@ function SideBar() {
 
     const url = window.location.href;
     const valueAfterSlash = url.split('/').pop();
-    console.log(valueAfterSlash);
 
     const [collapsed, setCollapsed] = useState(detectMobile());
     const { Sider } = Layout;
@@ -107,7 +106,7 @@ function SideBar() {
                             icon: <HomeFilled />,
                             label: 'Home',
                             onClick: () => {
-                                navigate('/');
+                                navigate('/projects/featherNotes');
                             }
                         },
                         {
@@ -115,7 +114,7 @@ function SideBar() {
                             icon: <StarFilled />,
                             label: 'Shortcuts',
                             onClick: () => {
-                                navigate('/shortCuts');
+                                navigate('/projects/featherNotes/shortCuts');
                             }
                         },
                         {
@@ -123,7 +122,7 @@ function SideBar() {
                             icon: <FileTextFilled />,
                             label: 'Notes',
                             onClick: () => {
-                                navigate('/notes');
+                                navigate('/projects/featherNotes/notes');
                             }
                         },
                         {
@@ -131,7 +130,7 @@ function SideBar() {
                             icon: <CheckCircleFilled />,
                             label: 'Tasks',
                             onClick: () => {
-                                navigate('/tasks');
+                                navigate('/projects/featherNotes/tasks');
                             }
                         },
                     ]}

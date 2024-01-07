@@ -3,7 +3,6 @@ import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './editor.scss';
 import TitleInput from './TitleInput';
-import ReactDOM from 'react-dom/client';
 
 var Font = Quill.import('formats/font');
 Font.whitelist = ['Ubuntu', 'Raleway', 'Roboto', 'BadScript', 'CedarvilleCursive', 'Pacifico', 'DancingScript'];
@@ -14,28 +13,18 @@ const RichTextEditor = (props) => {
     const { handleCloseBtn, data, handleTitleChange } = props;
     const [value, setValue] = useState('');
     const targetRef = useRef(null);
+    const titleInputRef = useRef(null);
 
     useEffect(() => {
-        let isInjected = false
-
-        if (!isInjected) {
-            // The component to be appended
-            const injectedComponent = document.createElement('div');
-            injectedComponent.id = 'title-input';
-            const elem = document.getElementById('title-input');
-            const root = ReactDOM.createRoot(elem);
-            root.render(<TitleInput value={data.title} handleChange={handleTitleChange} />);
-            const targetElement = document.querySelector('.ql-toolbar');
-
-            // Append the new component after the target element
-            if (targetElement && !isInjected) {
-                targetElement.parentNode.insertBefore(injectedComponent, targetElement.nextSibling);
-                isInjected = true; // Mark as injected
+        if (targetRef.current) {
+            const quillEditor = document.querySelector('.ql-container');
+            const titleInput = titleInputRef.current;
+            if (quillEditor && titleInput) {
+                quillEditor.parentNode.insertBefore(titleInput, quillEditor);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    const handleClick = () => { }
 
     const myUndo = () => {
         let myEditor = targetRef.current.getEditor();
@@ -86,7 +75,6 @@ const RichTextEditor = (props) => {
 
                 ],
                 handlers: {
-                    image: handleClick,
                     close: () => {
                         handleCloseBtn();
                     },
@@ -115,6 +103,10 @@ const RichTextEditor = (props) => {
 
     return (
         <>
+            <div ref={titleInputRef}>
+                <TitleInput value={data?.title} handleChange={handleTitleChange} />
+            </div>
+
             <ReactQuill
                 theme="snow"
                 value={value}
