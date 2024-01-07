@@ -1,42 +1,17 @@
-import React, { useRef, useState, useReducer } from 'react';
+import React, { useRef, useState, useReducer, useEffect } from 'react';
 import { GrDocumentNotes } from "react-icons/gr";
-import { detectMobile, generateBasicNote } from '../helpers';
+import { detectMobile, notesReducer } from '../helpers';
 import createNotes from '../assets/createNotesF.jpg'
 import NotesList from '../components/Notes';
 import RichEditor from '../components/Editor';
 
 const initialState = JSON.parse(sessionStorage.getItem('notes')) || [];
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'ADD_NOTE':
-            const newNote = generateBasicNote();
-            sessionStorage.setItem('notes', JSON.stringify([...state, newNote]));
-            return [...state, newNote];
-        case 'UPDATE_NOTE':
-            const updatedNotes = state.map((note) => {
-                if (note.id === action.payload.id) {
-                    return {
-                        ...note,
-                        ...action.payload.updatedNote,
-                    };
-                }
-                return note;
-            });
-            sessionStorage.setItem('notes', JSON.stringify(updatedNotes));
-            return updatedNotes;
-        case 'DELETE_NOTE':
-            const filteredNotes = state.filter((note) => note.id !== action.payload.id);
-            sessionStorage.setItem('notes', JSON.stringify(filteredNotes));
-            return filteredNotes;
-        default:
-            return state;
-    }
-};
 const Notes = () => {
     const [showEditor, setShowEditor] = useState(false);
     const [currentNote, setCurrentNote] = useState(null);
-    const [notes, dispatch] = useReducer(reducer, initialState, () => {
+    const [showCurrentNote, setShowCurrentNote] = useState(null);
+    const [notes, dispatch] = useReducer(notesReducer, initialState, () => {
         const sessionState = sessionStorage.getItem('notes');
         if (sessionState) {
             return JSON.parse(sessionState);
@@ -46,11 +21,20 @@ const Notes = () => {
     const notesRef = useRef(null);
 
 
+    useEffect(() => {
+        if (showCurrentNote) {
+            setCurrentNote(notes?.[notes?.length - 1]);
+            setShowCurrentNote(false)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [showCurrentNote, notes]);
+
     const isMobile = detectMobile();
 
-    const createNote = () => {
-        dispatch({ type: 'ADD_NOTE' });
+    const createNote = async () => {
+        dispatch({ type: 'ADD_NOTE' })
         setShowEditor(true);
+        setShowCurrentNote(true)
     };
 
     const handleClose = () => {
@@ -58,11 +42,8 @@ const Notes = () => {
     };
 
     const handleRowClick = (row) => {
-        console.log('rowClick', row.title)
         setShowEditor(true);
-
         setCurrentNote(row);
-
     }
 
     const renderListSections = () => {
@@ -73,10 +54,10 @@ const Notes = () => {
                         <div className='mt-3 createNoteImgContainer'>
                             <img src={createNotes} alt='create notes' className='createNoteImg' />
                             <p>
-                                Create your first note. Click the{' '}
+                                Create your first note. Click the
                                 <span className='text-blue-500 underline' onClick={createNote}>
                                     + New Note
-                                </span>{' '}
+                                </span>
                                 button in the sidebar to get started.
                             </p>
                         </div>
@@ -91,7 +72,7 @@ const Notes = () => {
     };
 
     const handleTitleChange = (value) => {
-        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote.id, updatedNote: { title: value } } });
+        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { title: value } } });
 
     }
 

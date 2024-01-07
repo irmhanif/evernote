@@ -4,6 +4,14 @@ import TableView from '../Table';
 const NotesList = (props) => {
     const { notes, onRowClick } = props
 
+    const notesList = notes.map((note) => {
+        return {
+            ...note,
+            title: note.title ? note.title : 'Untitled',
+            tags: note.tags.join(', ')
+        }
+    })
+
     const columns = [
         {
             accessorKey: 'title',
@@ -76,7 +84,7 @@ const NotesList = (props) => {
         // },
     ];
     return (
-        <TableView columns={columns} data={notes} onRowClick={onRowClick} />
+        <TableView columns={columns} data={notesList} onRowClick={onRowClick} />
     );
 };
 
