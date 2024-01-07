@@ -104,7 +104,7 @@ const RichTextEditor = (props) => {
     return (
         <>
             <div ref={titleInputRef}>
-                <TitleInput value={data?.title} handleChange={handleTitleChange} />
+                <TitleInput value={data.title || ''} handleChange={handleTitleChange} />
             </div>
 
             <ReactQuill

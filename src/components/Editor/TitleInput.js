@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 
 const TitleInput = (props) => {
     const { value, handleChange } = props;
     const [inputValue, setInputValue] = useState(value)
+
+    useEffect(() => {
+        setInputValue(value)
+    }, [value])
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value)

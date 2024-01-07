@@ -1,10 +1,11 @@
 import React from 'react';
 import TableView from '../Table';
+import { deepCopy } from '../../helpers';
 
 const NotesList = (props) => {
     const { notes, onRowClick } = props
 
-    const notesList = notes.map((note) => {
+    const notesList = deepCopy(notes).map((note) => {
         return {
             ...note,
             title: note.title ? note.title : 'Untitled',

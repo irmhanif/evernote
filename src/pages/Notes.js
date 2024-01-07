@@ -1,4 +1,5 @@
 import React, { useRef, useState, useReducer, useEffect } from 'react';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { GrDocumentNotes } from "react-icons/gr";
 import { detectMobile, notesReducer } from '../helpers';
 import createNotes from '../assets/createNotesF.jpg'
@@ -34,6 +35,7 @@ const Notes = () => {
     const createNote = async () => {
         dispatch({ type: 'ADD_NOTE' })
         setShowEditor(true);
+        setCurrentNote({})
         setShowCurrentNote(true)
     };
 
@@ -81,10 +83,11 @@ const Notes = () => {
             {((isMobile && !showEditor) || !isMobile) && (
                 <div className='notesSidebar' style={{ width: isMobile ? '100%' : '20%' }}>
                     <div className='p-2 notesHeader'>
-                        <div>
-                            <h2>
+                        <div className='flex justify-between'>
+                            <h2 className='m-0'>
                                 <GrDocumentNotes /> Notes
                             </h2>
+                            <AddCircleIcon className='cursor-pointer' onClick={createNote} />
                         </div>
                         <div className='flex justify-between items-center'>
                             <p className='m-0'>
