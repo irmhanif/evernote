@@ -10,10 +10,20 @@ Quill.register(Font, true);
 
 
 const RichTextEditor = (props) => {
-    const { handleCloseBtn, data, handleTitleChange } = props;
-    const [value, setValue] = useState('');
+    const { handleCloseBtn, data, handleTitleChange, handleNotesUpdate } = props;
+    const [value, setValue] = useState(data?.description || '');
     const targetRef = useRef(null);
     const titleInputRef = useRef(null);
+
+    useEffect(() => {
+        handleNotesUpdate(value)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value])
+
+    useEffect(() => {
+        setValue(data?.description)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data?.description])
 
     useEffect(() => {
         if (targetRef.current) {

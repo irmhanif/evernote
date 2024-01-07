@@ -78,6 +78,10 @@ const Notes = () => {
 
     }
 
+    const handleNotesUpdate = (value) => {
+        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { description: value } } });
+    }
+
     return (
         <div ref={notesRef} className={isMobile ? 'mobileNotes' : 'flex'}>
             {((isMobile && !showEditor) || !isMobile) && (
@@ -102,7 +106,7 @@ const Notes = () => {
             )}
             {showEditor && <div style={{ width: isMobile ? '100%' : '80%' }} className=''>
                 <div className='notesContent'>
-                    <RichEditor handleCloseBtn={handleClose} data={currentNote} handleTitleChange={handleTitleChange} />
+                    <RichEditor handleCloseBtn={handleClose} data={currentNote} handleTitleChange={handleTitleChange} handleNotesUpdate={handleNotesUpdate} />
                 </div>
             </div>}
         </div>

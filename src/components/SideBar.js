@@ -109,14 +109,14 @@ function SideBar() {
                                 navigate('/projects/featherNotes');
                             }
                         },
-                        {
-                            key: 'shortCuts',
-                            icon: <StarFilled />,
-                            label: 'Shortcuts',
-                            onClick: () => {
-                                navigate('/projects/featherNotes/shortCuts');
-                            }
-                        },
+                        // {
+                        //     key: 'shortCuts',
+                        //     icon: <StarFilled />,
+                        //     label: 'Shortcuts',
+                        //     onClick: () => {
+                        //         navigate('/projects/featherNotes/shortCuts');
+                        //     }
+                        // },
                         {
                             key: 'notes',
                             icon: <FileTextFilled />,
