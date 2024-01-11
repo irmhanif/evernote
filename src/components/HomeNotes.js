@@ -8,6 +8,8 @@ const HomeNotes = () => {
     // Dummy notes
     const recentNotes = Array.from({ length: 10 }, (_, index) => `Note ${index + 21}`);
     const suggestedNotes = Array.from({ length: 10 }, (_, index) => `Note ${index + 11}`);
+    const initialState = JSON.parse(sessionStorage.getItem('notes')) || [];
+    console.log('initialState', initialState)
 
     return (
         <div className="tile-container">
@@ -22,9 +24,9 @@ const HomeNotes = () => {
                             <div className={`border-b-2 `}>
                                 {/* Display recent notes */}
                                 <div className="flex overflow-x-auto flex-nowrap">
-                                    {recentNotes.map((note, index) => (
+                                    {initialState.map((note, index) => (
                                         <div key={index} role='note' className="flex-shrink-0 w-40 h-40 bg-gray-200 m-2" style={{ width: '9rem' }}>
-                                            {note}
+                                            {note.title}
                                         </div>
                                     ))}
                                 </div>
