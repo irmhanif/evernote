@@ -5,6 +5,7 @@ import { detectMobile, notesReducer } from '../helpers';
 import createNotes from '../assets/createNotesF.jpg'
 import NotesList from '../components/Notes';
 import RichEditor from '../components/Editor';
+import moment from 'moment';
 
 const initialState = JSON.parse(sessionStorage.getItem('notes')) || [];
 
@@ -79,7 +80,7 @@ const Notes = () => {
     }
 
     const handleNotesUpdate = (value) => {
-        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { description: value } } });
+        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { description: value, dateUpdated: moment().format('MMM DD YY HH:mm'), } } });
     }
 
     return (
