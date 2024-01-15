@@ -1,4 +1,5 @@
 import moment from "moment";
+import * as yup from 'yup';
 
 export const uuidv4 = () => {
     if (typeof window !== 'undefined') {
@@ -106,3 +107,44 @@ export const detectMobile = () => {
 export const deepCopy = (obj) => {
     return JSON.parse(JSON.stringify(obj));
 }
+
+export const createValidationSchema = (fields) => {
+    const schema = {};
+
+    fields.forEach((field) => {
+        switch (field.type) {
+            case 'email':
+                schema[field.name] = yup
+                    .string(`Enter your ${field.label.toLowerCase()}`)
+                    .email(`Enter a valid ${field.label.toLowerCase()}`)
+                    .required(`${field.label} is required`);
+                break;
+            case 'password':
+                schema[field.name] = yup
+                    .string(`Enter your ${field.label.toLowerCase()}`)
+                    .min(field.min || 8, `${field.label} should be of minimum ${field.min || 8} characters length`)
+                    .required(`${field.label} is required`);
+                break;
+            case 'cpassword':
+                schema[field.name] = yup
+                    .string(`Enter your ${field.label.toLowerCase()}`)
+                    .min(field.min || 8, `${field.label} should be of minimum ${field.min || 8} characters length`)
+                    .oneOf([yup.ref('password')], 'Passwords must match')
+                    .required(`${field.label} is required`);
+                break;
+            // You can add more cases for other types of fields if needed
+            default:
+                schema[field.name] = yup.string(`Enter your ${field.label.toLowerCase()}`).required(`${field.label} is required`);
+                break;
+        }
+    });
+
+    return yup.object(schema);
+};
+
+// Example usage:
+const fields = [
+    { name: 'email', type: 'email', label: 'Email' },
+    { name: 'password', type: 'password', label: 'Password', min: 8 },
+    // Add more fields as needed
+];

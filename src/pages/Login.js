@@ -100,7 +100,7 @@ export default function Login() {
                                         <span className="txt1">
                                             {isLogin ? `Don’t have an account?` : 'Already have a account'}
                                         </span>
-                                        <span className="txt2" onClick={() => {
+                                        <span className="txt2 cursor-pointer" onClick={() => {
                                             handleFlip()
                                         }}>
                                             Sign {isLogin ? 'Up' : 'In'}
