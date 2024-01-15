@@ -1,32 +1,57 @@
-import React from 'react'
-import Avatar from '@mui/material/Avatar';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import React, { useState } from 'react'
 import './Login.scss';
+import Logo from '../components/Logo';
+import InputField from '../components/TextField';
 
-export default function SignUp() {
+export default function SignUp(props) {
+    const { handleFlip } = props
+    const [FormData, setFormData] = useState({})
+    const [showError, setShowError] = useState(false)
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = FormData;
+        setShowError(true)
+        console.log({
+            email: data.email,
+            password: data.password,
+            cpassword: data.cpassword,
+            name: data.name,
+        });
+
+    }
+
+    const handleChange = (value, id) => {
+        setFormData({ ...FormData, [id]: value });
+
+    }
+
+    const getError = (id) => {
+        return FormData[id] === '' && showError
+    }
     return (
-        <div class="wrap-login100">
-            <form class="login100-form validate-form">
-                <span class="login100-form-title p-b-26">
-                    Sign Up <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    </Avatar>
+        <div className="wrap-login100" >
+            <form className="signUp-form validate-form" onSubmit={handleSubmit}>
+                <span className="login100-form-title p-b-26">
+                    Sign Up
+                    <Logo />
                 </span>
-                <div class="wrap-input100 validate-input" data-validate="Valid Name is: abc">
-                    <TextField
+                <div className="wrap-input100 validate-input" data-validate="Valid Name is: abc">
+                    <InputField
                         margin="normal"
-                        required
+                        required={true}
                         fullWidth
                         id="name"
                         label="Name"
                         name="name"
                         autoComplete="name"
                         autoFocus
+                        handleChange={handleChange}
+                        error={getError('name')}
                     />
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                    <TextField
+                <div className="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                    <InputField
                         margin="normal"
                         required
                         fullWidth
@@ -35,13 +60,14 @@ export default function SignUp() {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        handleChange={handleChange}
                     />
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <span class="btn-show-pass">
-                        <i class="zmdi zmdi-eye"></i>
+                <div className="wrap-input100 validate-input" data-validate="Enter password">
+                    <span className="btn-show-pass">
+                        <i className="zmdi zmdi-eye"></i>
                     </span>
-                    <TextField
+                    <InputField
                         margin="normal"
                         required
                         fullWidth
@@ -50,41 +76,37 @@ export default function SignUp() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        handleChange={handleChange}
                     />
-                </div><div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <span class="btn-show-pass">
-                        <i class="zmdi zmdi-eye"></i>
+                </div><div className="wrap-input100 validate-input" data-validate="Enter password">
+                    <span className="btn-show-pass">
+                        <i className="zmdi zmdi-eye"></i>
                     </span>
-                    <TextField
+                    <InputField
                         margin="normal"
                         required
                         fullWidth
-                        name="password"
-                        label="Password"
+                        name="cpassword"
+                        label="Confirm Password"
                         type="password"
-                        id="password"
+                        id="cpassword"
                         autoComplete="current-password"
+                        handleChange={handleChange}
                     />
                 </div>
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn">
+                <div className="container-login100-form-btn">
+                    <div className="wrap-login100-form-btn">
+                        <div className="login100-form-bgbtn"></div>
+                        <button className="login100-form-btn" onClick={handleSubmit}>
                             Sign Up
                         </button>
                     </div>
                 </div>
-                <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                />
-                <div class="text-center p-t-115">
-                    <span class="txt1">
+                <div className="text-center p-t-115">
+                    <span className="txt1">
                         Already have a account {' '}
                     </span>
-                    <span className="txt2" onClick={() => {
-
-                    }}>
+                    <span className="txt2 cursor-pointer" onClick={handleFlip}>
                         Sign In
                     </span>
                 </div>

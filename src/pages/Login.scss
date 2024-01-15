@@ -174,13 +174,19 @@ iframe {
 .login100-form {
   width: 100%;
 }
-
+.signUp-form {
+  width: 100%;
+  z-index: 999;
+}
 .login100-form-title {
-  display: block;
   font-size: 30px;
   color: #333;
   line-height: 1.2;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 12px;
 }
 
 .login100-form-title i {
@@ -458,17 +464,15 @@ iframe {
 }
 
 .front {
-  background-color: #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
 }
 
 .back {
-  background-color: #ddd;
   transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.logoLogin image {
+  display: block;
+  width: 50px;
+  height: 50px;
 }
