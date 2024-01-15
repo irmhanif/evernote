@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { createValidationSchema } from '../helpers';
 import { signUpFields } from '../helpers/config';
 import TextField from '@mui/material/TextField';
+import axios from 'axios';
 
 export default function SignUp(props) {
     const { handleFlip } = props
@@ -18,7 +19,16 @@ export default function SignUp(props) {
         },
         validationSchema: createValidationSchema(signUpFields),
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            const apiUrl = 'http://localhost:5000/auth/register';
+            axios.post(apiUrl, values)
+                .then(response => {
+                    // Handle successful response
+                    console.log(response);
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error fetching data:', error);
+                });
         },
     });
 

@@ -8,5 +8,5 @@ export const signUpFields = [
     { name: 'name', type: 'text', label: 'Name', autoFocus: false },
     { name: 'email', type: 'email', label: 'Email' },
     { name: 'password', type: 'password', label: 'Password', min: 8 },
-    { name: 'cpassword', type: 'password', label: 'Confirm Password', min: 8 },
+    { name: 'confirmPassword', type: 'password', label: 'Confirm Password', min: 8 },
 ]
