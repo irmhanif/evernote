@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route as RouteV6, Routes, Navigate, useNavigate } from 'react-router-dom'
+import { BrowserRouter as Router, Route as RouteV6, Routes, Navigate } from 'react-router-dom'
 import './App.scss';
 import { theme } from 'antd';
 import Login from './pages/Login';
@@ -22,10 +22,6 @@ const App = () => {
       <Router>
         <div style={{ background: colorBgContainer }}>
           <Routes>
-            {/* <RouteV6
-            path="/projects/featherNotes/login"
-            element={() => (checkLoginStatus() ? <Navigate to="/projects/featherNotes/" /> : <Login />)}
-          /> */}
             <RouteV6 path="/" element={<Navigate to="/projects/featherNotes" />} />
             <RouteV6 path="/projects/featherNotes/login" element={<Login />} />
 
@@ -38,6 +34,7 @@ const App = () => {
               path="/projects/featherNotes"
               element={checkLoginStatus() ? <Dashboard /> : <Navigate to="/projects/featherNotes/login" />}
             />
+            <RouteV6 path="*" element={checkLoginStatus() ? <Dashboard /> : <Navigate to="/projects/featherNotes/login" />} />
           </Routes>
         </div>
       </Router></>
