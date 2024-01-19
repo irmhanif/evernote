@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,19 +8,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './Login.scss';
 import SignUp from './SignUp';
 import Logo from '../components/Logo';
+import { useFormik } from 'formik';
+import { createValidationSchema } from '../helpers';
+import axios from 'axios';
+import { loginFields } from '../helpers/config';
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
-
     const [isLogin, setIsLogin] = useState(true)
     const [isFlipped, setFlipped] = useState(false);
 
@@ -29,6 +23,26 @@ export default function Login() {
         setFlipped(!isFlipped);
         setIsLogin(!isLogin)
     };
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        validationSchema: createValidationSchema(loginFields),
+        onSubmit: (values) => {
+            const apiUrl = 'http://localhost:5000/auth/login';
+            axios.post(apiUrl, values)
+                .then(response => {
+                    // Handle successful response
+                    console.log(response);
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error fetching data:', error);
+                });
+        },
+    });
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -53,7 +67,7 @@ export default function Login() {
                     <div className="flipper">
                         <div className="front">
                             <div className="wrap-login100" style={!isLogin ? { 'visibility': 'hidden' } : { 'visibility': 'unset' }}>
-                                <form className="login100-form validate-form">
+                                <form className="login100-form validate-form" onSubmit={formik.handleSubmit}>
                                     <span className="login100-form-title p-b-26">
                                         Sign In <Logo />
                                     </span>
@@ -67,6 +81,11 @@ export default function Login() {
                                             name="email"
                                             autoComplete="email"
                                             autoFocus
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            error={formik.touched.email && Boolean(formik.errors.email)}
+                                            helperText={formik.touched.email && formik.errors.email}
+                                            value={formik.values?.email}
                                         />
                                     </div>
                                     <div className="wrap-input100 validate-input" data-validate="Enter password">
@@ -82,12 +101,17 @@ export default function Login() {
                                             type="password"
                                             id="password"
                                             autoComplete="current-password"
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            error={formik.touched.password && Boolean(formik.errors.password)}
+                                            helperText={formik.touched.password && formik.errors.password}
+                                            value={formik.values?.password}
                                         />
                                     </div>
                                     <div className="container-login100-form-btn">
                                         <div className="wrap-login100-form-btn">
                                             <div className="login100-form-bgbtn"></div>
-                                            <button className="login100-form-btn">
+                                            <button className="login100-form-btn" type='submit'>
                                                 Login
                                             </button>
                                         </div>

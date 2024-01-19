@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Login.scss';
 import Logo from '../components/Logo';
 import { useFormik } from 'formik';
