@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import cs from 'classnames';
 import {
-    StarFilled,
     HomeFilled,
     PlusOutlined,
     FileTextFilled,

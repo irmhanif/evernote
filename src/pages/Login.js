@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,20 +9,40 @@ import './Login.scss';
 import SignUp from './SignUp';
 import Logo from '../components/Logo';
 import { useFormik } from 'formik';
-import { createValidationSchema } from '../helpers';
+import { checkLoginStatus, createValidationSchema } from '../helpers';
 import axios from 'axios';
 import { loginFields } from '../helpers/config';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
 export default function Login() {
     const [isLogin, setIsLogin] = useState(true)
     const [isFlipped, setFlipped] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(checkLoginStatus())
+    const navigate = useNavigate();
 
     const handleFlip = () => {
         setFlipped(!isFlipped);
         setIsLogin(!isLogin)
     };
+
+    // After successful login API call
+    const saveTokenToCookie = async (token) => {
+        // Set an expiration date for the cookie (e.g., expires in 30 days)
+        await Cookies.set('token', token, { expires: 30 });
+        setLoggedIn(true)
+    };
+
+    useEffect(() => {
+        if (loggedIn) {
+            navigate('/projects/featherNotes/notes');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loggedIn])
+
+    // To retrieve the token later
 
     const formik = useFormik({
         initialValues: {
@@ -36,6 +56,7 @@ export default function Login() {
                 .then(response => {
                     // Handle successful response
                     console.log(response);
+                    saveTokenToCookie(response?.data.token)
                 })
                 .catch(error => {
                     // Handle error
@@ -66,7 +87,7 @@ export default function Login() {
                 <div className={`flip-container ${isFlipped ? 'flipped' : ''}`}>
                     <div className="flipper">
                         <div className="front">
-                            <div className="wrap-login100" style={!isLogin ? { 'visibility': 'hidden' } : { 'visibility': 'unset' }}>
+                            <div className="wrap-login100" style={!isLogin ? { 'display': 'none' } : { 'visibility': 'unset' }}>
                                 <form className="login100-form validate-form" onSubmit={formik.handleSubmit}>
                                     <span className="login100-form-title p-b-26">
                                         Sign In <Logo />

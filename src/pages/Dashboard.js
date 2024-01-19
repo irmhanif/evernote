@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route as RouteV6, Routes, useNavigate } from 'react-router-dom'
+import { Route as RouteV6, Routes } from 'react-router-dom'
 import '../App.scss';
 import { Layout, theme } from 'antd';
 import Home from './Home';
@@ -8,8 +8,6 @@ import Notes from './Notes';
 import NotFound from './NotFound';
 
 function Dashboard() {
-    const navigate = useNavigate();
-
     const {
         token: { colorBgContainer },
     } = theme.useToken();

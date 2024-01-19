@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import moment from "moment";
 import * as yup from 'yup';
 
@@ -141,9 +142,7 @@ export const createValidationSchema = (fields) => {
     return yup.object(schema);
 };
 
-// Example usage:
-const fields = [
-    { name: 'email', type: 'email', label: 'Email' },
-    { name: 'password', type: 'password', label: 'Password', min: 8 },
-    // Add more fields as needed
-];
+export const checkLoginStatus = () => {
+    // Example: Check if the user is logged in based on some authentication state
+    return Cookies.get('token') ? true : false;
+};
