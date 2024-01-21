@@ -54,7 +54,7 @@ export default function SignUp(props) {
                                 label={fields.label}
                                 name={fields.name}
                                 type={fields.type}
-                                autoComplete
+                                autoComplete={fields?.autoFocus || false}
                                 autoFocus={fields.autoFocus}
                                 onChange={handleChange}
                                 onBlur={formik.handleBlur}

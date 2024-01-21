@@ -1,3 +1,4 @@
+import axios from "axios";
 import Cookies from "js-cookie";
 import moment from "moment";
 import * as yup from 'yup';
@@ -32,10 +33,35 @@ export const generateBasicNote = () => {
         comments: []
     }
 }
+
+const getAuthToken = () => Cookies.get('token')
+
+export const axiosInstance = axios.create({
+    baseURL: 'http://localhost:5000', // Replace with your API base URL
+    timeout: 5000, // Set a timeout for the request in milliseconds
+    headers: {
+        'Content-Type': 'application/json', // Set the content type of the request
+        'Authorization': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWFhYzk5YzJiYzZhMTExY2M4YTMzMjYiLCJpYXQiOjE3MDU4NjkwMTYsImV4cCI6MTcwNTg3MjYxNn0.g2VQALGvKvkyZjs6mwN5r5ToBtiUkg5lKB7gO_O0fMQ` // Add the Authorization header with the token
+    }
+});
+
+const createNote = (values) => {
+    const apiUrl = '/api/resource';
+    axiosInstance.post(apiUrl, values)
+        .then(response => {
+            // Handle successful response
+            console.log(response);
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error fetching data:', error);
+        });
+}
 export const notesReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_NOTE':
             const newNote = generateBasicNote();
+            createNote(newNote)
             sessionStorage.setItem('notes', JSON.stringify([...state, newNote]));
             return [...state, newNote];
         case 'UPDATE_NOTE':
@@ -144,5 +170,7 @@ export const createValidationSchema = (fields) => {
 
 export const checkLoginStatus = () => {
     // Example: Check if the user is logged in based on some authentication state
-    return Cookies.get('token') ? true : false;
+    const token = Cookies.get('token')
+    const isLoggedIn = token ? true : false;
+    return isLoggedIn
 };
