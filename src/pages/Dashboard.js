@@ -17,7 +17,7 @@ function Dashboard() {
             <SideBar />
             <Layout className='content-area'>
                 <Routes>
-                    <RouteV6 path="/projects/featherNotes/" element={<Home />} />
+                    <RouteV6 path="/projects/featherNotes/home" element={<Home />} />
                     <RouteV6 path="/projects/featherNotes/notes" element={<Notes />} />
                     <RouteV6 path="*" element={<NotFound />} />
                 </Routes>

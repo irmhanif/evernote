@@ -105,7 +105,7 @@ function SideBar() {
                             icon: <HomeFilled />,
                             label: 'Home',
                             onClick: () => {
-                                navigate('/projects/featherNotes');
+                                navigate('/projects/featherNotes/home');
                             }
                         },
                         // {

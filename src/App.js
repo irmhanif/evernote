@@ -16,7 +16,7 @@ const App = () => {
   const navigate = useNavigate()
   useEffect(() => {
     if (checkLoginStatus()) {
-      navigate('/projects/featherNotes');
+      navigate('/projects/featherNotes/home');
     } else {
       navigate('/projects/featherNotes/login');
     }

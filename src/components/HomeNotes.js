@@ -6,7 +6,7 @@ import BoxLabel from './BoxLabel';
 
 const HomeNotes = () => {
     // Dummy notes
-    const initialState = JSON.parse(sessionStorage.getItem('notes')) || [];
+    const initialState = [];
 
     const recentNotes = initialState.sort(function (a, b) {
         return b.dateUpdated - a.dateUpdated;

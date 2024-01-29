@@ -45,12 +45,13 @@ export const axiosInstance = axios.create({
     }
 });
 
-const createNote = (values) => {
+export const createNote = async (values) => {
     const apiUrl = '/api/resource';
-    axiosInstance.post(apiUrl, values)
+    return await axiosInstance.post(apiUrl, values)
         .then(response => {
             // Handle successful response
             console.log(response);
+            return response.data
         })
         .catch(error => {
             // Handle error
@@ -60,9 +61,9 @@ const createNote = (values) => {
 export const notesReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_NOTE':
-            const newNote = generateBasicNote();
-            createNote(newNote)
-            sessionStorage.setItem('notes', JSON.stringify([...state, newNote]));
+            const newNote = action.payload;
+            // createNote(newNote)
+            // sessionStorage.setItem('notes', JSON.stringify([...state, newNote]));
             return [...state, newNote];
         case 'UPDATE_NOTE':
             const updatedNotes = state.map((note) => {
@@ -74,11 +75,11 @@ export const notesReducer = (state, action) => {
                 }
                 return note;
             });
-            sessionStorage.setItem('notes', JSON.stringify(updatedNotes));
+            // sessionStorage.setItem('notes', JSON.stringify(updatedNotes));
             return updatedNotes;
         case 'DELETE_NOTE':
             const filteredNotes = state.filter((note) => note.id !== action.payload.id);
-            sessionStorage.setItem('notes', JSON.stringify(filteredNotes));
+            // sessionStorage.setItem('notes', JSON.stringify(filteredNotes));
             return filteredNotes;
         default:
             return state;
