@@ -1,9 +1,11 @@
 import React from 'react'
 import cs from 'classnames';
 import { AiOutlineSetting } from "react-icons/ai";
+import { getUserData } from '../helpers';
 function Profile(props) {
     const { collapsed } = props
-    const username = "Mohamed Idris M";
+    const userData = getUserData()
+    const username = userData?.name || "Mohamed Idris M";
     const profileIcon = username[0].toUpperCase();
     return (
         <div className={cs("px-4 py-4 items-center flex justify-between profile", !collapsed && ' flex-col-reverse gap-1')}>
