@@ -9,7 +9,7 @@ export const uuidv4 = () => {
     }
     return 0;
 }
-
+export const getUserData = () => JSON.parse(Cookies.get('userData'))
 
 export const generateBasicNote = () => {
     return {
@@ -20,8 +20,6 @@ export const generateBasicNote = () => {
         dateUpdated: moment().format('MMM DD YY HH:mm'),
         reminderDate: null,
         location: null,
-        createdBy: 'admin',
-        updatedBy: 'admin',
         description: '',
         canvas: '',
         audioLink: '',
@@ -30,18 +28,22 @@ export const generateBasicNote = () => {
         url: '',
         tags: [],
         attachedImages: [],
-        comments: []
+        comments: [],
+        createdBy: getUserData()?.id,
+        updatedBy: getUserData()?.id,
+        createUser: getUserData()
     }
 }
 
 const getAuthToken = () => Cookies.get('token')
 
+
 export const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000', // Replace with your API base URL
-    timeout: 5000, // Set a timeout for the request in milliseconds
+    baseURL: 'http://localhost:5000',
+    timeout: 5000,
     headers: {
-        'Content-Type': 'application/json', // Set the content type of the request
-        'Authorization': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWFhYzk5YzJiYzZhMTExY2M4YTMzMjYiLCJpYXQiOjE3MDU4NjkwMTYsImV4cCI6MTcwNTg3MjYxNn0.g2VQALGvKvkyZjs6mwN5r5ToBtiUkg5lKB7gO_O0fMQ` // Add the Authorization header with the token
+        'Content-Type': 'application/json',
+        'Authorization': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWFhYzk5YzJiYzZhMTExY2M4YTMzMjYiLCJpYXQiOjE3MDU4NjkwMTYsImV4cCI6MTcwNTg3MjYxNn0.g2VQALGvKvkyZjs6mwN5r5ToBtiUkg5lKB7gO_O0fMQ`
     }
 });
 
@@ -102,9 +104,6 @@ export const getTimeOfDay = () => {
 }
 
 export const calculateImageBrightness = (image) => {
-    // Here, you can calculate the image brightness using image data.
-    // This is a simplified example and may not be highly accurate.
-    // You can find more advanced algorithms to calculate brightness.
 
     const canvas = document.createElement('canvas');
     canvas.width = image.width;
@@ -159,7 +158,6 @@ export const createValidationSchema = (fields) => {
                     .oneOf([yup.ref('password')], 'Passwords must match')
                     .required(`${field.label} is required`);
                 break;
-            // You can add more cases for other types of fields if needed
             default:
                 schema[field.name] = yup.string(`Enter your ${field.label.toLowerCase()}`).required(`${field.label} is required`);
                 break;
@@ -170,7 +168,6 @@ export const createValidationSchema = (fields) => {
 };
 
 export const checkLoginStatus = () => {
-    // Example: Check if the user is logged in based on some authentication state
     const token = Cookies.get('token')
     const isLoggedIn = token ? true : false;
     return isLoggedIn

@@ -1,6 +1,9 @@
 {
-  "extends": ["development"],
+  "extends": [
+    "development"
+  ],
   "hints": {
-    "apple-touch-icons": "off"
+    "apple-touch-icons": "off",
+    "meta-viewport": "off"
   }
 }

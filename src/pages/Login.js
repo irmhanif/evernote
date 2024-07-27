@@ -28,10 +28,11 @@ export default function Login() {
         setIsLogin(!isLogin)
     };
 
-    // After successful login API call
-    const saveTokenToCookie = async (token) => {
-        // Set an expiration date for the cookie (e.g., expires in 30 days)
+    const saveTokenToCookie = async (data) => {
+        const { token, name, email, id } = data
+        const userData = { name, email, id }
         await Cookies.set('token', token, { expires: 30 });
+        await Cookies.set('userData', JSON.stringify(userData), { expires: 30 });
         setLoggedIn(true)
     };
 
@@ -42,24 +43,20 @@ export default function Login() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loggedIn])
 
-    // To retrieve the token later
-
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: 'ifadmin@idrism',
+            password: '263256321',
         },
         validationSchema: createValidationSchema(loginFields),
         onSubmit: (values) => {
             const apiUrl = 'http://localhost:5000/auth/login';
             axios.post(apiUrl, values)
                 .then(response => {
-                    // Handle successful response
                     console.log(response);
-                    saveTokenToCookie(response?.data.token)
+                    saveTokenToCookie(response?.data)
                 })
                 .catch(error => {
-                    // Handle error
                     console.error('Error fetching data:', error);
                 });
         },
@@ -100,7 +97,7 @@ export default function Login() {
                                             id="email"
                                             label="Email Address"
                                             name="email"
-                                            autoComplete="email"
+                                            autoComplete={true}
                                             autoFocus
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
@@ -121,7 +118,6 @@ export default function Login() {
                                             label="Password"
                                             type="password"
                                             id="password"
-                                            autoComplete="current-password"
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                             error={formik.touched.password && Boolean(formik.errors.password)}

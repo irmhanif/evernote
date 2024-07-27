@@ -1,7 +1,7 @@
 import React, { useRef, useState, useReducer, useEffect } from 'react';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { GrDocumentNotes } from "react-icons/gr";
-import { createNote, detectMobile, generateBasicNote } from '../helpers';
+import { createNote, deepCopy, detectMobile, generateBasicNote, getUserData } from '../helpers';
 import createNotes from '../assets/createNotesF.jpg'
 import NotesList from '../components/Notes';
 import RichEditor from '../components/Editor';
@@ -50,13 +50,8 @@ const Notes = () => {
     const [currentNote, setCurrentNote] = useState(null);
     const [showCurrentNote, setShowCurrentNote] = useState(null);
 
-
-
-
-
     const [notes, dispatch] = useReducer(notesReducer, initialState);
     const notesRef = useRef(null);
-
 
     useEffect(() => {
         if (showCurrentNote) {
@@ -77,8 +72,26 @@ const Notes = () => {
             setCurrentNote(response)
             setShowCurrentNote(true)
         }
-
     };
+
+    const handleTitleChange = (value) => {
+        const clonedNotes = deepCopy(notes)
+        const updatedNotes = clonedNotes.map((note) => {
+            if (note.id === currentNote?.id) {
+                return {
+                    ...note,
+                    title: value,
+                };
+            }
+            return note;
+        });
+        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { title: value } } });
+
+    }
+
+    const handleNotesUpdate = (value) => {
+        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { description: value, dateUpdated: moment().format('MMM DD YY HH:mm'), } } });
+    }
 
     const handleClose = () => {
         setShowEditor(false);
@@ -113,15 +126,6 @@ const Notes = () => {
             </div>
         );
     };
-
-    const handleTitleChange = (value) => {
-        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { title: value } } });
-
-    }
-
-    const handleNotesUpdate = (value) => {
-        dispatch({ type: 'UPDATE_NOTE', payload: { id: currentNote?.id, updatedNote: { description: value, dateUpdated: moment().format('MMM DD YY HH:mm'), } } });
-    }
 
     return (
         <div ref={notesRef} className={isMobile ? 'mobileNotes' : 'flex'}>
