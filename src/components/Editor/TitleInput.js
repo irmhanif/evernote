@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TextField from '@material-ui/core/TextField';
+import { Input } from "antd";
 
 const TitleInput = (props) => {
     const { value, handleChange } = props;
@@ -14,7 +14,7 @@ const TitleInput = (props) => {
         handleChange(e.target.value)
     }
     return (
-        <TextField
+        <Input
             variant="standard"
             className='titleInput'
             InputProps={{
