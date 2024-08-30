@@ -97,7 +97,7 @@ export default function Login() {
                                             id="email"
                                             label="Email Address"
                                             name="email"
-                                            autoComplete={true}
+                                            autoComplete="true"
                                             autoFocus
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}

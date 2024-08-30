@@ -9,7 +9,7 @@ export const uuidv4 = () => {
     }
     return 0;
 }
-export const getUserData = () => JSON.parse(Cookies.get('userData'))
+export const getUserData = () => JSON.parse(Cookies.get('userData') || '{}')
 
 export const generateBasicNote = () => {
     return {

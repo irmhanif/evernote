@@ -45,7 +45,7 @@ export default function SignUp(props) {
                 </span>
                 {signUpFields.map(fields => {
                     return (
-                        <div className="wrap-input100 validate-input" >
+                        <div className="wrap-input100 validate-input" key={fields.name} >
                             <TextField
                                 margin="normal"
                                 required={true}
@@ -54,7 +54,7 @@ export default function SignUp(props) {
                                 label={fields.label}
                                 name={fields.name}
                                 type={fields.type}
-                                autoComplete={fields?.autoFocus || false}
+                                autoComplete={`${fields?.autoFocus}` || 'false'}
                                 autoFocus={fields.autoFocus}
                                 onChange={handleChange}
                                 onBlur={formik.handleBlur}

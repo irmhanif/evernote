@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function Events(props) {
     const currentSelectedDay = props.selectedDay;
@@ -14,7 +14,7 @@ function Events(props) {
                 onClick={() => removeEvent(i)}
                 data-date={event.date}
             >
-                <ReactCSSTransitionGroup
+                <TransitionGroup
                     component="div"
                     classNames="animated-time"
                     transitionName="time"
@@ -23,11 +23,13 @@ function Events(props) {
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
                 >
-                    <div className="event-time event-attribute">
-                        {event.date.format("HH:mm")}
-                    </div>
-                </ReactCSSTransitionGroup>
-                <ReactCSSTransitionGroup
+                    <CSSTransition>
+                        <div className="event-time event-attribute">
+                            {event.date.format("HH:mm")}
+                        </div>
+                    </CSSTransition>
+                </TransitionGroup>
+                <TransitionGroup
                     component="div"
                     classNames="animated-title"
                     transitionName="title"
@@ -37,7 +39,7 @@ function Events(props) {
                     transitionLeaveTimeout={500}
                 >
                     <div className="event-title event-attribute">{event.title}</div>
-                </ReactCSSTransitionGroup>
+                </TransitionGroup>
             </div>
         );
     });
